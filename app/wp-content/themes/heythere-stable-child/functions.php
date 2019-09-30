@@ -2,9 +2,7 @@
 /**
  * 
  * 1. Register and enqueue script and styles
- * 2. Add theme and post type support
- * 3. Add custom logo + check for svg
- * 4. Add top section background selector in customizer
+ * 2. Register templates CPT
  */
 
 
@@ -42,4 +40,62 @@
 }
 add_action('wp_enqueue_scripts', 'sitecreator_styles_child', 20); // Add Theme Child Stylesheet
 
+
+/**
+ * 2. Register templates CPT
+ */
+register_post_type( 'templates',
+array(
+  'labels' => array(
+    'name' => __( 'Templates' ),
+    'singular_name' => __( 'Template' )
+  ),
+  'public' => true,  // it's not public, it shouldn't have it's own permalink, and so on
+  'publicly_queryable' => true,  // you should be able to query it
+  'show_ui' => true,  // you should be able to edit it in wp-admin
+  'exclude_from_search' => false,  // you should exclude it from search results
+  'show_in_nav_products' => false,  // you shouldn't be able to add it to products
+  'has_archive' => false,  // it shouldn't have archive page
+  'rewrite' => false,  // it shouldn't have rewrite rules
+  //'taxonomies'  => array( 'item_type' , 'gender' ),
+  'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields','excerpt' ),
+)
+);
+
+$taxonomies = array(
+  array(
+      'slug'         => 'type',
+      'single_name'  => 'Type',
+      'plural_name'  => 'Types',
+      'post_type'    => 'templates',
+      'rewrite'      => array( 'slug' => 'type' ),
+      'hierarchical' => true,
+  )
+);
+foreach( $taxonomies as $taxonomy ) {
+  $labels = array(
+      'name' => $taxonomy['plural_name'],
+      'singular_name' => $taxonomy['single_name'],
+      'search_items' =>  'Search ' . $taxonomy['plural_name'],
+      'all_items' => 'All ' . $taxonomy['plural_name'],
+      'parent_item' => 'Parent ' . $taxonomy['single_name'],
+      'parent_item_colon' => 'Parent ' . $taxonomy['single_name'] . ':',
+      'edit_item' => 'Edit ' . $taxonomy['single_name'],
+      'update_item' => 'Update ' . $taxonomy['single_name'],
+      'add_new_item' => 'Add New ' . $taxonomy['single_name'],
+      'new_item_name' => 'New ' . $taxonomy['single_name'] . ' Name',
+      'menu_name' => $taxonomy['plural_name']
+  );
+  
+  $rewrite = isset( $taxonomy['rewrite'] ) ? $taxonomy['rewrite'] : array( 'slug' => $taxonomy['slug'] );
+  $hierarchical = isset( $taxonomy['hierarchical'] ) ? $taxonomy['hierarchical'] : true;
+
+  register_taxonomy( $taxonomy['slug'], $taxonomy['post_type'], array(
+      'hierarchical' => $hierarchical,
+      'labels' => $labels,
+      'show_ui' => true,
+      'query_var' => true,
+      'rewrite' => $rewrite,
+  ));
+  }
 ?>
