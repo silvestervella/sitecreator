@@ -98,4 +98,20 @@ foreach( $taxonomies as $taxonomy ) {
       'rewrite' => $rewrite,
   ));
   }
+
+
+/**
+ * 2. Register templates CPT
+ *
+ * @link https://wpforms.com/developers/add-field-values-for-dropdown-checkboxes-and-multiple-choice-fields/
+ *
+ */
+function sitecreator_wpf_dev_show_fields_options_setting() {
+ 
+  return true;
+}
+add_action( 'wpforms_fields_show_options_setting', 'sitecreator_wpf_dev_show_fields_options_setting', 10, 2 );
+
+
+add_post_type_support( 'post', 'page-attributes' );
 ?>
