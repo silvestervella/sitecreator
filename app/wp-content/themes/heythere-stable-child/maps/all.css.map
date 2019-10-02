@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"../scss/all.css","sourcesContent":[]}
+{"version":3,"sources":["_generic.scss"],"names":[],"mappings":"AAAA,KACI,WAAA,IADJ,OAGQ,MAAA","file":"../scss/all.css","sourcesContent":["body {\n    background: red;\n    a {\n        color: black\n    }\n}"]}
