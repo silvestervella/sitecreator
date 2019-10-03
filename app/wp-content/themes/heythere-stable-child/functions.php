@@ -44,13 +44,13 @@ add_action('wp_enqueue_scripts', 'sitecreator_styles_child', 20); // Add Theme C
 /**
  * 2. Register templates CPT
  */
-register_post_type( 'templates',
+register_post_type( 'site-features',
 array(
   'labels' => array(
-    'name' => __( 'Templates' ),
-    'singular_name' => __( 'Template' )
+    'name' => __( 'Site Features' ),
+    'singular_name' => __( 'Feature' )
   ),
-  'public' => true,  // it's not public, it shouldn't have it's own permalink, and so on
+  'public' => false,  // it's not public, it shouldn't have it's own permalink, and so on
   'publicly_queryable' => true,  // you should be able to query it
   'show_ui' => true,  // you should be able to edit it in wp-admin
   'exclude_from_search' => false,  // you should exclude it from search results
@@ -67,7 +67,7 @@ $taxonomies = array(
       'slug'         => 'type',
       'single_name'  => 'Type',
       'plural_name'  => 'Types',
-      'post_type'    => 'templates',
+      'post_type'    => 'site-features',
       'rewrite'      => array( 'slug' => 'type' ),
       'hierarchical' => true,
   )
@@ -96,21 +96,9 @@ foreach( $taxonomies as $taxonomy ) {
       'show_ui' => true,
       'query_var' => true,
       'rewrite' => $rewrite,
+      'public' => false,
   ));
   }
-
-
-/**
- * 2. Register templates CPT
- *
- * @link https://wpforms.com/developers/add-field-values-for-dropdown-checkboxes-and-multiple-choice-fields/
- *
- */
-function sitecreator_wpf_dev_show_fields_options_setting() {
- 
-  return true;
-}
-add_action( 'wpforms_fields_show_options_setting', 'sitecreator_wpf_dev_show_fields_options_setting', 10, 2 );
 
 
 /**
@@ -119,54 +107,4 @@ add_action( 'wpforms_fields_show_options_setting', 'sitecreator_wpf_dev_show_fie
 add_post_type_support( 'post', 'page-attributes' );
 
 
-
-
-
-/**
- * 4. Woocommerce show variations
-*/
-/**
- * Replace add to cart button in the loop.
- */
-function iconic_change_loop_add_to_cart() {
-  remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
-  add_action( 'woocommerce_after_shop_loop_item', 'iconic_template_loop_add_to_cart', 10 );
-}
-
-add_action( 'init', 'iconic_change_loop_add_to_cart', 10 );
-
-/**
-* Use single add to cart button for variable products.
-*/
-function iconic_template_loop_add_to_cart() {
-  global $product;
-
-  if ( ! $product->is_type( 'variable' ) ) {
-      woocommerce_template_loop_add_to_cart();
-      return;
-  }
-
-  remove_action( 'woocommerce_single_variation', 'woocommerce_single_variation_add_to_cart_button', 20 );
-  add_action( 'woocommerce_single_variation', 'iconic_loop_variation_add_to_cart_button', 20 );
-
-  woocommerce_template_single_add_to_cart();
-}
-
-/**
-* Customise variable add to cart button for loop.
-*
-* Remove qty selector and simplify.
-*/
-function iconic_loop_variation_add_to_cart_button() {
-  global $product;
-
-  ?>
-  <div class="woocommerce-variation-add-to-cart variations_button">
-      <button type="submit" class="single_add_to_cart_button button"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
-      <input type="hidden" name="add-to-cart" value="<?php echo absint( $product->get_id() ); ?>" />
-      <input type="hidden" name="product_id" value="<?php echo absint( $product->get_id() ); ?>" />
-      <input type="hidden" name="variation_id" class="variation_id" value="0" />
-  </div>
-  <?php
-}
 ?>
