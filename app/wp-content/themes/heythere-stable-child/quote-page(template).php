@@ -18,7 +18,6 @@ function my_contact_form_generate_response($type, $message){
 }
 
 
-
 //response messages
 $not_human       = "Human verification incorrect.";
 $missing_content = "Please supply all information.";
@@ -27,14 +26,19 @@ $message_unsent  = "Message was not sent. Try Again.";
 $message_sent    = "Thanks! Your message has been sent.";
  
 //user posted variables
-$selected_template = (string)$_POST['template'];
+$selected_template = (string)$_POST['templates'];
+$selected_images = (string)$_POST['images'];
+$selected_customisation = (string)$_POST['customisation'];
+$selected_domain = (string)$_POST['domain'];
+$selected_hosting = (string)$_POST['hosting'];
+
 $name = $_POST['message_name'];
 $email = $_POST['message_email'];
-$message = $_POST['message_text'] .= $selected_template;
+$message = $_POST['message_text'];
 $human = $_POST['message_human'];
 
 
-function sitecreator_get_prods($term) {
+function sitecreator_get_prods($atts) {
 
     $field = '';
     $templates = get_posts(array(
@@ -42,32 +46,27 @@ function sitecreator_get_prods($term) {
         'tax_query' => array(
             array(
                 'taxonomy' => 'type',
-                'terms' => $term,
+                'field' => 'slug',
+                'terms' => $atts['terms'],
             )
         )
     ));
     if ($templates):
+        $price = get_post_meta($template->ID, 'price');
         $field = '<div>';
-        ?>
-
-        <?php
         foreach($templates as $template) {
+            $price = get_post_meta($template->ID, 'price');
             $field .= '<label>
-                                <input type="radio" name="template" value="' . $template->post_name . $term .'" >
-                                <img src="'. get_the_post_thumbnail_url( $template->ID  ) .'">
-                                </label>';
+                            <input type="radio" class="calc" name="'. $atts['terms'].'" value="' . $template->post_name .'" number="'.$price[0].'">
+                            <img src="'. get_the_post_thumbnail_url( $template->ID  ) .'">
+                        </label>';
         }
         $field .= '</div>';
     endif; 
-    var_dump($term);
 return $field;
 }
 
 
-
-
-
- 
 //php mailer variables
 $to = get_option('admin_email');
 $subject = "Someone sent a message from ".get_bloginfo('name');
@@ -83,21 +82,39 @@ $headers = 'From: '. $email . "\r\n" .
         else //email is valid
         {
             //validate presence of name and message
-            if(empty($name) || empty($message)){
+            if(empty($name) || empty($message) || empty($selected_template) || empty($selected_images) || empty($selected_customisation) || empty($selected_domain) || empty($selected_hosting) ){
                 my_contact_form_generate_response("error", $missing_content);
             }
             else //ready to go!
             {
-                $sent = wp_mail($to, $subject, strip_tags($message), $headers);
-                if($sent) my_contact_form_generate_response("success", $message_sent); //message sent!
-                else my_contact_form_generate_response("error", $message_unsent); //message wasn't sent
+                $site_info = 'Template - ' 
+                . $selected_template . ' Images - ' 
+                . $selected_images . ' Customisation - ' 
+                . $selected_customisation . ' Domain - ' 
+                . $selected_domain . ' Hosting - ' 
+                . $selected_hosting . ' Comments - ' 
+                . $message;
+
+                $sent = wp_mail($to, $subject, strip_tags($site_info), $headers);
+                if($sent) {
+                    my_contact_form_generate_response("success", $message_sent); //message sent!
+                    $order_cpt = array(
+                        'post_title'    => $name,
+                        'post_content'  => $site_info . ' Email - ' .$email ,
+                        'post_status'   => 'draft',
+                        'post_author'   => 1,
+                        'post_type'     => 'orders'
+                      );
+                      wp_insert_post( $order_cpt );
+                } else {
+                    my_contact_form_generate_response("error", $message_unsent); //message wasn't sent
+                }
             }
         }
     }
   }
   else my_contact_form_generate_response("error", $missing_content);
   
-
 get_header(); ?>
 
     <main class="site-content text-center dark">
@@ -134,15 +151,27 @@ get_header(); ?>
                                 <p><label for="message_human">Human Verification: <span>*</span> <br><input type="text" style="width: 60px;" name="message_human"> + 3 = 5</label></p>
                             </fieldset>
                             <fieldset>
-                                <?php echo sitecreator_get_prods(array('templates')); ?>
+                                <?php echo sitecreator_get_prods(array('terms' => 'templates')); ?>
                             </fieldset>
                             <fieldset>
-                                <?php echo sitecreator_get_prods(array('images')); ?>
+                                <?php echo sitecreator_get_prods(array('terms' => 'images')); ?>
                             </fieldset>
+                            <fieldset>
+                                <?php echo sitecreator_get_prods(array('terms' => 'customisation')); ?>
+                            </fieldset>
+                            <fieldset>
+                                <?php echo sitecreator_get_prods(array('terms' => 'domain')); ?>
+                            </fieldset>
+                            <fieldset>
+                                <?php echo sitecreator_get_prods(array('terms' => 'hosting')); ?>
+                            </fieldset>
+                            <div id="quote-items"></div>
                             <input type="hidden" name="submitted" value="<?php echo wp_create_nonce('quote-nonce'); ?>">
                             <p><input type="submit"></p>
                         </form>
                     </div>
+
+
 
                     <?php if( $numpages > 1 ) { ?>
                         <div class="main-article-pagination">

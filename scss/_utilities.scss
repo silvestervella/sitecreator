@@ -1,0 +1,21 @@
+// Variables 
+
+$color-1: #5580E9;
+$color-2: #84CEEB;
+$color-3: #59B8EB;
+$color-4: #C1C7E4;
+$color-5: #8860D0;
+$color-6: #ae9fff;
+
+
+// background mixins
+@mixin bk-grad($color1, $color2) {
+ 
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5580e9+1,094ee5+100 */
+background: $color1; /* Old browsers */
+background: -moz-linear-gradient(45deg,  rgba($color1 , .8) 1%, rgba($color2 , 0.8) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(45deg,  rgba($color1 , .8) 1%, rgba($color2 , 0.8) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(45deg,  rgba($color1 , .8) 1%, rgba($color2 , 0.8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$color1, endColorstr=$color2,GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+  }

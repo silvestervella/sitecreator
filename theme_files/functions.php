@@ -30,11 +30,11 @@
 
     //Register Child Scripts
     //wp_register_script( 'bootstrap', get_stylesheet_directory_uri() . '/js/bootstrap.min.js', array( 'jquery' ) );
-    //wp_register_script( 'theme-script', get_stylesheet_directory_uri() . '/js/script.js', array( 'jquery' ) );
+    wp_register_script( 'theme-script', get_stylesheet_directory_uri() . '/js/script.js', array( 'jquery' ) );
     
     // Enqueue Child Scripts
     //wp_enqueue_script( 'bootstrap' ); 
-    //wp_enqueue_script( 'theme-script' );   
+    wp_enqueue_script( 'theme-script' );   
 
 
 }
@@ -54,6 +54,24 @@ array(
   'publicly_queryable' => true,  // you should be able to query it
   'show_ui' => true,  // you should be able to edit it in wp-admin
   'exclude_from_search' => false,  // you should exclude it from search results
+  'show_in_nav_products' => false,  // you shouldn't be able to add it to products
+  'has_archive' => false,  // it shouldn't have archive page
+  'rewrite' => false,  // it shouldn't have rewrite rules
+  //'taxonomies'  => array( 'item_type' , 'gender' ),
+  'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields','excerpt' )
+)
+);
+
+register_post_type( 'orders',
+array(
+  'labels' => array(
+    'name' => __( 'Orders' ),
+    'singular_name' => __( 'Order' )
+  ),
+  'public' => false,  // it's not public, it shouldn't have it's own permalink, and so on
+  'publicly_queryable' => false,  // you should be able to query it
+  'show_ui' => true,  // you should be able to edit it in wp-admin
+  'exclude_from_search' => true,  // you should exclude it from search results
   'show_in_nav_products' => false,  // you shouldn't be able to add it to products
   'has_archive' => false,  // it shouldn't have archive page
   'rewrite' => false,  // it shouldn't have rewrite rules
@@ -106,6 +124,5 @@ foreach( $taxonomies as $taxonomy ) {
  * 3. Add page attributes to posts
 */
 add_post_type_support( 'post', 'page-attributes' );
-
 
 ?>
