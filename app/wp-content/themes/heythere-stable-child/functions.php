@@ -58,7 +58,7 @@ array(
   'has_archive' => false,  // it shouldn't have archive page
   'rewrite' => false,  // it shouldn't have rewrite rules
   //'taxonomies'  => array( 'item_type' , 'gender' ),
-  'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields','excerpt' ),
+  'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields','excerpt' )
 )
 );
 
@@ -96,7 +96,8 @@ foreach( $taxonomies as $taxonomy ) {
       'show_ui' => true,
       'query_var' => true,
       'rewrite' => $rewrite,
-      'public' => false,
+      'public' => false,  
+      'show_admin_column' => true
   ));
   }
 

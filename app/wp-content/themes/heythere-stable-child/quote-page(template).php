@@ -27,10 +27,44 @@ $message_unsent  = "Message was not sent. Try Again.";
 $message_sent    = "Thanks! Your message has been sent.";
  
 //user posted variables
+$selected_template = (string)$_POST['template'];
 $name = $_POST['message_name'];
 $email = $_POST['message_email'];
-$message = $_POST['message_text'] + $_POST['template'];
+$message = $_POST['message_text'] .= $selected_template;
 $human = $_POST['message_human'];
+
+
+function sitecreator_get_prods($term) {
+
+    $field = '';
+    $templates = get_posts(array(
+        'post_type' => 'site-features',
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'type',
+                'terms' => $term,
+            )
+        )
+    ));
+    if ($templates):
+        $field = '<div>';
+        ?>
+
+        <?php
+        foreach($templates as $template) {
+            $field .= '<label>
+                                <input type="radio" name="template" value="' . $template->post_name . $term .'" >
+                                <img src="'. get_the_post_thumbnail_url( $template->ID  ) .'">
+                                </label>';
+        }
+        $field .= '</div>';
+    endif; 
+    var_dump($term);
+return $field;
+}
+
+
+
 
 
  
@@ -100,26 +134,10 @@ get_header(); ?>
                                 <p><label for="message_human">Human Verification: <span>*</span> <br><input type="text" style="width: 60px;" name="message_human"> + 3 = 5</label></p>
                             </fieldset>
                             <fieldset>
-                                <?php
-                                $templatesField = '';
-                                $templates = get_posts(array(
-                                    'post_type' => 'site-features'
-                                ));
-
-                                if ($templates):
-                                    $templatesField = '<div">';
-                                    ?>
-
-                                    <?php
-                                    foreach($templates as $template) {
-                                        $templatesField .= '<label>
-                                                            <input type="radio" name="template" value="' . $template->post_name . '" >
-                                                            <img src="'. get_the_post_thumbnail_url( $template->ID  ) .'">
-                                                            </label>';
-                                    }
-                                    $templatesField .= "</div>";
-                                endif; 
-                                echo $templatesField; ?>
+                                <?php echo sitecreator_get_prods(array('templates')); ?>
+                            </fieldset>
+                            <fieldset>
+                                <?php echo sitecreator_get_prods(array('images')); ?>
                             </fieldset>
                             <input type="hidden" name="submitted" value="<?php echo wp_create_nonce('quote-nonce'); ?>">
                             <p><input type="submit"></p>
