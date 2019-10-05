@@ -1,0 +1,24 @@
+body.post-template-quote-pagetemplate {
+    main {
+        background: $color-1;
+        form {
+            width: 100%;
+            position: relative;
+            display: block;
+            fieldset {
+                position: absolute;
+                width: 100%;
+                display: none;
+                background: rgba(255,255,255,0.1);
+                padding: 30px;
+                border-radius: 15px;
+                &.active {
+                    display: block;
+                }
+                label {
+                    width: 100%
+                }
+            }
+        }
+    }
+}

@@ -101,7 +101,7 @@ $headers = 'From: '. $email . "\r\n" .
                     $order_cpt = array(
                         'post_title'    => $name,
                         'post_content'  => $site_info . ' Email - ' .$email ,
-                        'post_status'   => 'draft',
+                        'post_status'   => 'private',
                         'post_author'   => 1,
                         'post_type'     => 'orders'
                       );
@@ -144,30 +144,41 @@ get_header(); ?>
                     <div id="respond">
                         <?php echo $response; ?>
                         <form action="<?php the_permalink(); ?>" method="post">
-                            <fieldset>
+                            <fieldset class="active">
                                 <p><label for="name">Name: <span>*</span> <br><input type="text" name="message_name" value="<?php echo esc_attr($_POST['message_name']); ?>"></label></p>
                                 <p><label for="message_email">Email: <span>*</span> <br><input type="text" name="message_email" value="<?php echo esc_attr($_POST['message_email']); ?>"></label></p>
-                                <p><label for="message_text">Message: <span>*</span> <br><textarea type="text" name="message_text"><?php echo esc_textarea($_POST['message_text']); ?></textarea></label></p>
-                                <p><label for="message_human">Human Verification: <span>*</span> <br><input type="text" style="width: 60px;" name="message_human"> + 3 = 5</label></p>
+                                <button class="next">NEXT</button>
                             </fieldset>
                             <fieldset>
                                 <?php echo sitecreator_get_prods(array('terms' => 'templates')); ?>
+                                <button class="next">NEXT</button>
                             </fieldset>
                             <fieldset>
                                 <?php echo sitecreator_get_prods(array('terms' => 'images')); ?>
+                                <button class="next">NEXT</button>
                             </fieldset>
                             <fieldset>
                                 <?php echo sitecreator_get_prods(array('terms' => 'customisation')); ?>
+                                <button class="next">NEXT</button>
                             </fieldset>
                             <fieldset>
                                 <?php echo sitecreator_get_prods(array('terms' => 'domain')); ?>
+                                <button class="next">NEXT</button>
                             </fieldset>
                             <fieldset>
                                 <?php echo sitecreator_get_prods(array('terms' => 'hosting')); ?>
+                                <button class="next">NEXT</button>
                             </fieldset>
-                            <div id="quote-items"></div>
-                            <input type="hidden" name="submitted" value="<?php echo wp_create_nonce('quote-nonce'); ?>">
-                            <p><input type="submit"></p>
+                            <fieldset>
+                                <div id="quote-items"></div>
+                                <p><label for="message_text">Message: <span>*</span> <br><textarea type="text" name="message_text"><?php echo esc_textarea($_POST['message_text']); ?></textarea></label></p>
+                                <button class="next">NEXT</button>
+                            </fieldset>
+                            <fieldset>
+                                <p><label for="message_human">Human Verification: <span>*</span> <br><input type="text" style="width: 60px;" name="message_human"> + 3 = 5</label></p>
+                                <input type="hidden" name="submitted" value="<?php echo wp_create_nonce('quote-nonce'); ?>">
+                                <p><input type="submit"></p>
+                            </fieldset>
                         </form>
                     </div>
 

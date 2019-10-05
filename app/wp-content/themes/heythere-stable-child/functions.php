@@ -68,8 +68,8 @@ array(
     'name' => __( 'Orders' ),
     'singular_name' => __( 'Order' )
   ),
-  'public' => false,  // it's not public, it shouldn't have it's own permalink, and so on
-  'publicly_queryable' => false,  // you should be able to query it
+  'public' => true,  // it's not public, it shouldn't have it's own permalink, and so on
+  'publicly_queryable' => true,  // you should be able to query it
   'show_ui' => true,  // you should be able to edit it in wp-admin
   'exclude_from_search' => true,  // you should exclude it from search results
   'show_in_nav_products' => false,  // you shouldn't be able to add it to products
