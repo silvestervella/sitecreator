@@ -6,6 +6,7 @@ $color-3: #59B8EB;
 $color-4: #C1C7E4;
 $color-5: #8860D0;
 $color-6: #ae9fff;
+$red: #c55454;
 
 
 // background mixins
@@ -18,4 +19,27 @@ background: -webkit-linear-gradient(45deg,  rgba($color1 , .8) 1%, rgba($color2 
 background: linear-gradient(45deg,  rgba($color1 , .8) 1%, rgba($color2 , 0.8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$color1, endColorstr=$color2,GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
+  }
+
+  // quote animations
+  @keyframes quote-anim-1 {
+    from {
+      transform: translateX(0%) scale(1);
+      opacity: 1
+    }
+    to {
+      transform: translateX(-100%) scale(0.7);
+      opacity: 0
+    }
+  }
+
+  @keyframes quote-anim-2 {
+    from {
+      transform: scale(0.7);
+      opacity: 0
+    }
+    to {
+      transform: scale(1);
+      opacity: 1
+    }
   }

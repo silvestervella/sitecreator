@@ -1,22 +1,70 @@
 body.post-template-quote-pagetemplate {
     main {
         background: $color-1;
-        form {
-            width: 100%;
-            position: relative;
-            display: block;
-            fieldset {
-                position: absolute;
+        #single-main-article-content {
+            .error {
+                color: $red;
+                font-size: 18px;
+                background: $color-4;
+                margin-bottom: 20px;
+                padding: 15px 50px;
+                border-radius: 25px;
+            }
+            form {
                 width: 100%;
-                display: none;
-                background: rgba(255,255,255,0.1);
-                padding: 30px;
-                border-radius: 15px;
-                &.active {
-                    display: block;
-                }
-                label {
-                    width: 100%
+                position: relative;
+                display: block;
+                fieldset {
+                    width: 100%;
+                    display: none;
+                    background: lighten($color-1, 3%);
+                    padding: 30px 50px;
+                    border-radius: 50px;
+                    transform: translateX(0%) scale(1);
+                    opacity: 1;
+                    &.active {
+                        display: block;
+                        animation: quote-anim-2 1s;
+                        animation-fill-mode: forwards;
+                        position: relative;
+                    }
+                    &.prev-field {
+                        animation: quote-anim-1 1s;
+                        animation-fill-mode: forwards;
+                        display: block;
+                        position: absolute;
+                    }
+                    label {
+                        width: 100%;
+                        color: $color-4;
+                        span {
+                            font-size: 30px;
+                            span {
+                                color: $color-2;
+                            }
+                        }
+                        input {
+                            background: 0;
+                            -webkit-appearance: none;
+                            outline: 0;
+                            border: 0;
+                            border-bottom: 1px solid lighten($color-1, 20%);
+                            width: 100%;
+                            font-size: 40px;
+                            color: white;
+                            padding: 5px 30px;
+                            margin-bottom: 15px;
+                        }
+                    }
+                    button {
+                        background: $color-4;
+                        font-size: 20px;
+                        padding: 10px 20px;
+                        margin-top: 30px;
+                        margin-right: 0;
+                        margin-left: auto;
+                        display: block;
+                    }
                 }
             }
         }

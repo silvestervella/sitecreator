@@ -20,7 +20,8 @@ function my_contact_form_generate_response($type, $message){
 
 //response messages
 $not_human       = "Human verification incorrect.";
-$missing_content = "Please supply all information.";
+$missing_content = "Please supply all required* information.";
+$missing_content_not_sent = "Order not sent! Please supply all required* information.";
 $email_invalid   = "Email Address Invalid.";
 $message_unsent  = "Message was not sent. Try Again.";
 $message_sent    = "Thanks! Your message has been sent.";
@@ -33,6 +34,7 @@ $selected_domain = (string)$_POST['domain'];
 $selected_hosting = (string)$_POST['hosting'];
 
 $name = $_POST['message_name'];
+$company = $_POST['message_company'];
 $email = $_POST['message_email'];
 $message = $_POST['message_text'];
 $human = $_POST['message_human'];
@@ -134,8 +136,8 @@ get_header(); ?>
                 </div>
                 <?php
                 if ( has_post_thumbnail() ) { ?>
-                    <div class="height-50" style="background: url(<?php echo $heythere_lite_image_attributes[0]; ?>); background-size: cover; background-position: center center; background-repeat: no-repeat;">
-                    </div>
+                    <!--<div class="height-50" style="background: url( echo $heythere_lite_image_attributes[0];); background-size: cover; background-position: center center; background-repeat: no-repeat;">
+                    </div>-->
                 <?php } ?>
                 <div id="single-main-article-content" class="main-article-content break-word">
                     <?php the_content(); ?>
@@ -145,34 +147,35 @@ get_header(); ?>
                         <?php echo $response; ?>
                         <form action="<?php the_permalink(); ?>" method="post">
                             <fieldset class="active">
-                                <p><label for="name">Name: <span>*</span> <br><input type="text" name="message_name" value="<?php echo esc_attr($_POST['message_name']); ?>"></label></p>
-                                <p><label for="message_email">Email: <span>*</span> <br><input type="text" name="message_email" value="<?php echo esc_attr($_POST['message_email']); ?>"></label></p>
-                                <button class="next">NEXT</button>
+                                <label for="name"><span>Contact Name: <span>*</span></span> <br><input type="text" name="message_name" value="<?php echo esc_attr($_POST['message_name']); ?>"></label>
+                                <label for="company"><span>Company: </span> <br><input type="text" name="message_company" value="<?php echo esc_attr($_POST['message_company']); ?>"></label>
+                                <label for="message_email"><span>Email: <span>*</span></span> <br><input type="text" name="message_email" value="<?php echo esc_attr($_POST['message_email']); ?>"></label>
+                                <div class="next" >NEXT</div>
                             </fieldset>
                             <fieldset>
                                 <?php echo sitecreator_get_prods(array('terms' => 'templates')); ?>
-                                <button class="next">NEXT</button>
+                                <div class="next">NEXT</div>
                             </fieldset>
                             <fieldset>
                                 <?php echo sitecreator_get_prods(array('terms' => 'images')); ?>
-                                <button class="next">NEXT</button>
+                                <div class="next">NEXT</div>
                             </fieldset>
                             <fieldset>
                                 <?php echo sitecreator_get_prods(array('terms' => 'customisation')); ?>
-                                <button class="next">NEXT</button>
+                                <div class="next">NEXT</div>
                             </fieldset>
                             <fieldset>
                                 <?php echo sitecreator_get_prods(array('terms' => 'domain')); ?>
-                                <button class="next">NEXT</button>
+                                <div class="next">NEXT</div>
                             </fieldset>
                             <fieldset>
                                 <?php echo sitecreator_get_prods(array('terms' => 'hosting')); ?>
-                                <button class="next">NEXT</button>
+                                <div class="next">NEXT</div>
                             </fieldset>
                             <fieldset>
                                 <div id="quote-items"></div>
                                 <p><label for="message_text">Message: <span>*</span> <br><textarea type="text" name="message_text"><?php echo esc_textarea($_POST['message_text']); ?></textarea></label></p>
-                                <button class="next">NEXT</button>
+                                <div class="next">NEXT</div>
                             </fieldset>
                             <fieldset>
                                 <p><label for="message_human">Human Verification: <span>*</span> <br><input type="text" style="width: 60px;" name="message_human"> + 3 = 5</label></p>
