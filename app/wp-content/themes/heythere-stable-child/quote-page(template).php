@@ -17,7 +17,6 @@ function my_contact_form_generate_response($type, $message){
 
 }
 
-
 //response messages
 $not_human       = "Human verification incorrect.";
 $missing_content = "Please supply all required* information.";
