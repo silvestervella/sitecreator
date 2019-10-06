@@ -24,7 +24,7 @@ $missing_content = "Please supply all required* information.";
 $missing_content_not_sent = "Order not sent! Please supply all required* information.";
 $email_invalid   = "Email Address Invalid.";
 $message_unsent  = "Message was not sent. Try Again.";
-$message_sent    = "Thanks! Your message has been sent.";
+$message_sent    = "Thanks! Your Order has been submitted. We'll get back to you soon.";
  
 //user posted variables
 $selected_template = (string)$_POST['templates'];
@@ -55,12 +55,12 @@ function sitecreator_get_prods($atts) {
     ));
     if ($templates):
         $price = get_post_meta($template->ID, 'price');
-        $field = '<div>';
+        $field = '<div class="options">';
         foreach($templates as $template) {
             $price = get_post_meta($template->ID, 'price');
-            $field .= '<label>
+            $field .= '<label class="option">
                             <input type="radio" class="calc" name="'. $atts['terms'].'" value="' . $template->post_name .'" number="'.$price[0].'">
-                            <img src="'. get_the_post_thumbnail_url( $template->ID  ) .'">
+                            <div class="img-wrap"> <img src="'. get_the_post_thumbnail_url( $template->ID  ) .'"> </div>
                         </label>';
         }
         $field .= '</div>';
@@ -84,7 +84,7 @@ $headers = 'From: '. $email . "\r\n" .
         else //email is valid
         {
             //validate presence of name and message
-            if(empty($name) || empty($message) || empty($selected_template) || empty($selected_images) || empty($selected_customisation) || empty($selected_domain) || empty($selected_hosting) ){
+            if(empty($name) || empty($selected_template) || empty($selected_images) || empty($selected_customisation) || empty($selected_domain) || empty($selected_hosting) ){
                 my_contact_form_generate_response("error", $missing_content);
             }
             else //ready to go!
@@ -147,9 +147,9 @@ get_header(); ?>
                         <?php echo $response; ?>
                         <form action="<?php the_permalink(); ?>" method="post">
                             <fieldset class="active">
-                                <label for="name"><span>Contact Name: <span>*</span></span> <br><input type="text" name="message_name" value="<?php echo esc_attr($_POST['message_name']); ?>"></label>
-                                <label for="company"><span>Company: </span> <br><input type="text" name="message_company" value="<?php echo esc_attr($_POST['message_company']); ?>"></label>
-                                <label for="message_email"><span>Email: <span>*</span></span> <br><input type="text" name="message_email" value="<?php echo esc_attr($_POST['message_email']); ?>"></label>
+                                <label for="name"><span>Contact Name: <span class="required">*</span></span> <br><input type="text" name="message_name" value="<?php echo esc_attr($_POST['message_name']); ?>"></label>
+                                <label for="company"><span>Company: <span class="optional">(Optional)</span></span> <br><input type="text" name="message_company" value="<?php echo esc_attr($_POST['message_company']); ?>"></label>
+                                <label for="message_email"><span>Email: <span class="required">*</span></span> <br><input type="text" name="message_email" value="<?php echo esc_attr($_POST['message_email']); ?>"></label>
                                 <div class="next" >NEXT</div>
                             </fieldset>
                             <fieldset>
@@ -174,11 +174,11 @@ get_header(); ?>
                             </fieldset>
                             <fieldset>
                                 <div id="quote-items"></div>
-                                <p><label for="message_text">Message: <span>*</span> <br><textarea type="text" name="message_text"><?php echo esc_textarea($_POST['message_text']); ?></textarea></label></p>
+                                <label for="message_text"><Span>Any queries or requests?  <span class="optional">(Optional)</span></span> <br><textarea type="text" name="message_text"><?php echo esc_textarea($_POST['message_text']); ?></textarea></label>
                                 <div class="next">NEXT</div>
                             </fieldset>
                             <fieldset>
-                                <p><label for="message_human">Human Verification: <span>*</span> <br><input type="text" style="width: 60px;" name="message_human"> + 3 = 5</label></p>
+                                <p><label for="message_human">Human Verification: <span class="required">*</span> <br><input type="text" name="message_human"> + 3 = 5</label></p>
                                 <input type="hidden" name="submitted" value="<?php echo wp_create_nonce('quote-nonce'); ?>">
                                 <p><input type="submit"></p>
                             </fieldset>

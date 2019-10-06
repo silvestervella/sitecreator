@@ -38,7 +38,7 @@ jQuery(document).ready(function() {
             for (var i = 0; i < itemNames.length; i++) {
             total += itemNames[i] << 0;
         }                         
-        jQuery("#quote-items").text(total);
+        jQuery("#quote-items").html('Your Price Is <span>&euro;' + total + '</span>');
         });
 
     // 1.3 Quote fieldset animation
