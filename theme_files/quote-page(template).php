@@ -60,7 +60,7 @@ function sitecreator_get_prods($atts) {
             if (has_term('templates' , 'type' , $feature->ID)) {
                 $price = get_post_meta($feature->ID, 'price');
                 $field .= '<label class="option">
-                                <input type="radio" class="calc" name="templates" value="' . $feature->post_name .'" number="'.$price[0].'">
+                                <input type="radio" class="calc '.$atts['terms'].'" name="templates" value="' . $feature->post_name .'" number="'.$price[0].'">
                                 <div class="img-wrap"> <img src="'. get_the_post_thumbnail_url( $feature->ID  ) .'"> </div>
                             </label>';
             } else {
@@ -153,14 +153,14 @@ get_header(); ?>
                     <!-- quotation form -->
                     <div id="respond">
                         <?php echo $response; ?>
-                        <form action="<?php the_permalink(); ?>" method="post">
-                            <fieldset class="active">
+                        <form id="quote-form" action="<?php the_permalink(); ?>" method="post">
+                            <fieldset class="quote-sec active">
                                 <label for="name"><span>Contact Name: <span class="required">*</span></span> <br><input type="text" name="message_name" value="<?php echo esc_attr($_POST['message_name']); ?>"></label>
                                 <label for="company"><span>Company: <span class="optional">(Optional)</span></span> <br><input type="text" name="message_company" value="<?php echo esc_attr($_POST['message_company']); ?>"></label>
                                 <label for="message_email"><span>Email: <span class="required">*</span></span> <br><input type="text" name="message_email" value="<?php echo esc_attr($_POST['message_email']); ?>"></label>
                                 <div class="next" >NEXT</div>
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="quote-sec">
                                     <div class="template-tabs">
                                     <div class="tablinks" name="blog">Blog</div>
                                     <div class="tablinks" name="ecommerce">Ecommerce</div>
@@ -173,36 +173,37 @@ get_header(); ?>
                                     </div>
 
                                     <div id="ecommerce" class="tabcontent">
-                                    <?php echo sitecreator_get_prods(array('terms' => 'portfolio')); ?>
+                                    <?php echo sitecreator_get_prods(array('terms' => 'e-commerce')); ?>
                                     </div>
 
                                     <div id="portfolio" class="tabcontent">
-                                    <?php echo sitecreator_get_prods(array('terms' => 'e-commerce')); ?>
+                                    <?php echo sitecreator_get_prods(array('terms' => 'portfolio')); ?>
                                     </div>
                                 <div class="next">NEXT</div>
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="quote-sec" id="specs"></fieldset>
+                            <fieldset class="quote-sec">
                                 <?php echo sitecreator_get_prods(array('terms' => 'images')); ?>
                                 <div class="next">NEXT</div>
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="quote-sec">
                                 <?php echo sitecreator_get_prods(array('terms' => 'customisation')); ?>
                                 <div class="next">NEXT</div>
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="quote-sec">
                                 <?php echo sitecreator_get_prods(array('terms' => 'domain')); ?>
                                 <div class="next">NEXT</div>
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="quote-sec">
                                 <?php echo sitecreator_get_prods(array('terms' => 'hosting')); ?>
                                 <div class="next">NEXT</div>
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="quote-sec">
                                 <div id="quote-items"></div>
                                 <label for="message_text"><Span>Any queries or requests?  <span class="optional">(Optional)</span></span> <br><textarea type="text" name="message_text"><?php echo esc_textarea($_POST['message_text']); ?></textarea></label>
                                 <div class="next">NEXT</div>
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="quote-sec">
                                 <p><label for="message_human">Human Verification: <span class="required">*</span> <br><input type="text" name="message_human"> + 3 = 5</label></p>
                                 <input type="hidden" name="submitted" value="<?php echo wp_create_nonce('quote-nonce'); ?>">
                                 <p><input type="submit"></p>
