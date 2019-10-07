@@ -42,8 +42,10 @@ $human = $_POST['message_human'];
 function sitecreator_get_prods($atts) {
 
     $field = '';
-    $templates = get_posts(array(
+    $features = get_posts(array(
         'post_type' => 'site-features',
+        'posts_per_page'=>-1, 
+        'numberposts'=>-1,
         'tax_query' => array(
             array(
                 'taxonomy' => 'type',
@@ -52,15 +54,22 @@ function sitecreator_get_prods($atts) {
             )
         )
     ));
-    if ($templates):
-        $price = get_post_meta($template->ID, 'price');
+    if ($features):
         $field = '<div class="options">';
-        foreach($templates as $template) {
-            $price = get_post_meta($template->ID, 'price');
+        foreach($features as $feature) {
+            if (has_term('templates' , 'type' , $feature->ID)) {
+                $price = get_post_meta($feature->ID, 'price');
+                $field .= '<label class="option">
+                                <input type="radio" class="calc" name="templates" value="' . $feature->post_name .'" number="'.$price[0].'">
+                                <div class="img-wrap"> <img src="'. get_the_post_thumbnail_url( $feature->ID  ) .'"> </div>
+                            </label>';
+            } else {
+            $price = get_post_meta($feature->ID, 'price');
             $field .= '<label class="option">
-                            <input type="radio" class="calc" name="'. $atts['terms'].'" value="' . $template->post_name .'" number="'.$price[0].'">
-                            <div class="img-wrap"> <img src="'. get_the_post_thumbnail_url( $template->ID  ) .'"> </div>
+                            <input type="radio" class="calc" name="'. $atts['terms'].'" value="' . $feature->post_name .'" number="'.$price[0].'">
+                            <div class="img-wrap"> <img src="'. get_the_post_thumbnail_url( $feature->ID  ) .'"> </div>
                         </label>';
+            }
         }
         $field .= '</div>';
     endif; 
@@ -152,7 +161,24 @@ get_header(); ?>
                                 <div class="next" >NEXT</div>
                             </fieldset>
                             <fieldset>
-                                <?php echo sitecreator_get_prods(array('terms' => 'templates')); ?>
+                                    <div class="template-tabs">
+                                    <div class="tablinks" name="blog">Blog</div>
+                                    <div class="tablinks" name="ecommerce">Ecommerce</div>
+                                    <div class="tablinks" name="portfolio">Portfolio</div>
+                                    </div>
+
+                                    <!-- Tab content -->
+                                    <div id="blog" class="tabcontent">
+                                    <?php echo sitecreator_get_prods(array('terms' => 'blog')); ?>
+                                    </div>
+
+                                    <div id="ecommerce" class="tabcontent">
+                                    <?php echo sitecreator_get_prods(array('terms' => 'portfolio')); ?>
+                                    </div>
+
+                                    <div id="portfolio" class="tabcontent">
+                                    <?php echo sitecreator_get_prods(array('terms' => 'e-commerce')); ?>
+                                    </div>
                                 <div class="next">NEXT</div>
                             </fieldset>
                             <fieldset>

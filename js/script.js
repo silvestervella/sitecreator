@@ -56,4 +56,33 @@ jQuery(document).ready(function() {
 
     });
 
+    // 1.4 Quote fieldset tabs
+    jQuery('div.tablinks').on("click", function() {
+        // Declare all variables
+        var i, tabcontent, tablinks , clickedbutton;
+
+        clickedbutton = jQuery(this).attr('name');
+      
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = jQuery('div.tabcontent');
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+      
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = jQuery('div.tablinks');
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+      
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        jQuery('#' + clickedbutton).css({
+            'display': 'block'
+        }).display = "block";
+        jQuery(this).addClass('active');
+      });
+      jQuery('div.tabcontent').first().css({
+        'display': 'block'
+      });
+
 });

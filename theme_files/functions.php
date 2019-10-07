@@ -48,7 +48,7 @@ register_post_type( 'site-features',
 array(
   'labels' => array(
     'name' => __( 'Site Features' ),
-    'singular_name' => __( 'Feature' )
+    'singular_name' => __( 'Feature' ),
   ),
   'public' => false,  // it's not public, it shouldn't have it's own permalink, and so on
   'publicly_queryable' => true,  // you should be able to query it
@@ -57,7 +57,6 @@ array(
   'show_in_nav_products' => false,  // you shouldn't be able to add it to products
   'has_archive' => false,  // it shouldn't have archive page
   'rewrite' => false,  // it shouldn't have rewrite rules
-  //'taxonomies'  => array( 'item_type' , 'gender' ),
   'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields','excerpt' )
 )
 );

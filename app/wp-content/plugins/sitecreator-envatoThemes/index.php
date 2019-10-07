@@ -7,6 +7,8 @@ Author: ..
 Version: 1.0
 */
 
+global $collection;
+
 // Add menu page
 add_action('admin_menu', 'sitecreator_envato_setup_menu');
 function sitecreator_envato_setup_menu(){
@@ -21,12 +23,6 @@ function sitecreator_envato_init(){
     }
     echo "<h1>Get Envato Themes</h1>";
 
-  // Check whether the button has been pressed AND also check the nonce
-  if (isset($_POST['envatothemes_button']) && check_admin_referer('envatothemes_button_clicked')) {
-    // the button has been pressed AND we've passed the security check
-    sitecreator_get_envato_themes();
-  }
-
     // Check whether the button has been pressed AND also check the nonce
     if (isset($_POST['envatothemes_getcollections']) && check_admin_referer('envatothemes_getcollections_clicked')) {
       // the button has been pressed AND we've passed the security check
@@ -36,32 +32,20 @@ function sitecreator_envato_init(){
   echo '<form action="'. admin_url("admin.php?page=get-envato-plugin") .'" method="post">';
 
   // this is a WordPress security feature - see: https://codex.wordpress.org/WordPress_Nonces
-  wp_nonce_field('envatothemes_button_clicked');
-  echo '<input type="hidden" value="true" name="envatothemes_button" />';
-  echo 'Get themes';
-  submit_button('Call Function');
-  echo '</form>';
-  echo '</div>';
-
-
-  echo '<form action="'. admin_url("admin.php?page=get-envato-plugin") .'" method="post">';
-
-  // this is a WordPress security feature - see: https://codex.wordpress.org/WordPress_Nonces
   wp_nonce_field('envatothemes_getcollections_clicked');
   echo '<input type="hidden" value="true" name="envatothemes_getcollections" />';
-  echo 'Get collections';
-  submit_button('Call Function');
+  submit_button('Get Themes');
   echo '</form>';
-  echo '</div>';
-
 }
 
 
-function sitecreator_get_envato_themes($atts) {
-  $url = "https://api.envato.com/v3/market/user/collection?id=" . $atts['collection_id'];
+function sitecreator_get_envato_themes($collection) {
+  global $collection;
+
+  $url = "https://api.envato.com/v3/market/user/collection?id=" . $collection->id;
   $curl = curl_init($url);
   
-  $personal_token = "";
+  $personal_token = "ry8dHahFRPPKpRh804AXWvmvo5z7xCXa";
   $header = array();
   $header[] = 'Authorization: Bearer '.$personal_token;
   $header[] = 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:41.0) Gecko/20100101 Firefox/41.0';
@@ -81,7 +65,6 @@ function sitecreator_get_envato_themes($atts) {
     $theme_post_name = $item->name;
 
     $theme_post = array(
-      //'ID'            => '345678',
       'post_title'    => $item->name,
       'post_content'  => 'contenttt',
       'post_status'   => 'publish',
@@ -92,16 +75,20 @@ function sitecreator_get_envato_themes($atts) {
       $args = array(
         'post_type' => 'site-features',
         'name'  =>  $theme_post_id,
+        'posts_per_page'=>-1, 
+        'numberposts'=>-1,
         'suppress_filters' => false
     ); 
     $theme_posts = get_posts($args);
+
+    $all_terms = array('templates' , $collection->name );
 
     if (!$theme_posts) {
 
       wp_insert_post( $theme_post );
       $the_post_slug = get_page_by_title( $item->name , OBJECT, 'site-features');
       $the_post_id = $the_post_slug->ID;
-      wp_set_object_terms( $the_post_id, 'templates' , 'type' );
+      wp_set_object_terms( $the_post_id, $all_terms , 'type' , true);
       
       } else {
       return;
@@ -110,6 +97,9 @@ function sitecreator_get_envato_themes($atts) {
 }
 
 function  sitecreator_get_envato_collections() {
+
+  global $collection;
+
   $url = "https://api.envato.com/v3/market/user/collections";
   $curl = curl_init($url);
   
@@ -128,10 +118,20 @@ function  sitecreator_get_envato_collections() {
   $collections = $envatoRes->collections;
 
   foreach($collections as $collection) {
-    // sitecreator_get_envato_themes(array(
-    //   'collection_id' => $collections->id
-    // ));
-    echo $collection->id;
+
+    $collection_name = $collection->name;
+
+    if(!term_exists($collection_name , 'type')) {
+      wp_insert_term(
+        $collection_name , 
+        'type',
+        array(
+          'parent'      => '18',
+        )
+      );
+    };
+
+    sitecreator_get_envato_themes($collection);
   }
 
 
