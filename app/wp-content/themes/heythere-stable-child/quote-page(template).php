@@ -27,6 +27,7 @@ $message_sent    = "Thanks! Your Order has been submitted. We'll get back to you
  
 //user posted variables
 $selected_template = (string)$_POST['templates'];
+$selected_specs = (string)$_POST['specs'];
 $selected_images = (string)$_POST['images'];
 $selected_customisation = (string)$_POST['customisation'];
 $selected_domain = (string)$_POST['domain'];
@@ -60,7 +61,7 @@ function sitecreator_get_prods($atts) {
             if (has_term('templates' , 'type' , $feature->ID)) {
                 $price = get_post_meta($feature->ID, 'price');
                 $field .= '<label class="option">
-                                <input type="radio" class="calc '.$atts['terms'].'" name="templates" value="' . $feature->post_name .'" number="'.$price[0].'">
+                                <input type="radio" class="calc templates '.$atts['terms'].'" name="templates" value="' . $feature->post_name .'" number="'.$price[0].'">
                                 <div class="img-wrap"> <img src="'. get_the_post_thumbnail_url( $feature->ID  ) .'"> </div>
                             </label>';
             } else {
@@ -92,7 +93,7 @@ $headers = 'From: '. $email . "\r\n" .
         else //email is valid
         {
             //validate presence of name and message
-            if(empty($name) || empty($selected_template) || empty($selected_images) || empty($selected_customisation) || empty($selected_domain) || empty($selected_hosting) ){
+            if(empty($name) || empty($selected_template) || empty($selected_images) || empty($selected_customisation) || empty($selected_domain) || empty($selected_hosting) || empty($selected_specs) ) {
                 my_contact_form_generate_response("error", $missing_content);
             }
             else //ready to go!

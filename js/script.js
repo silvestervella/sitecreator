@@ -85,33 +85,15 @@ jQuery(document).ready(function() {
         'display': 'block'
       });
 
-      var ecommerce = '<div class="options">';
-
-      ecommerce += '<label class="option">';
-      ecommerce += '<input type="radio" class="calc" name="specs" value="name of the package" number="30"></input>';
-      ecommerce += '<div class="img-wrap"> <img src="https://web.mygreyblack.com/wp-content/uploads/2019/09/261-e488b5.jpg"> </div>';
-      ecommerce += '</label>';
-
-      ecommerce += '<label class="option">';
-      ecommerce += '<input type="radio" class="calc" name="specs" value="name of the package" number="30"></input>';
-      ecommerce += '<div class="img-wrap"> <img src="https://web.mygreyblack.com/wp-content/uploads/2019/09/261-e488b5.jpg"> </div>';
-      ecommerce += '</label>';
-
-      ecommerce += '<label class="option">';
-      ecommerce += '<input type="radio" class="calc" name="specs" value="name of the package" number="30"></input>';
-      ecommerce += '<div class="img-wrap"> <img src="https://web.mygreyblack.com/wp-content/uploads/2019/09/261-e488b5.jpg"> </div>';
-      ecommerce += '</label>';
-
-      ecommerce += '</div>';
-      
-      ecommerce += '<div class="next">NEXT</div>';
-
 
     // 1.5 check if ecommerce to add html
-    jQuery('.e-commerce').change(function() {
-      if (jQuery(".e-commerce:checked")) {
-        jQuery('#specs').append(ecommerce);
-      };
+    jQuery('.templates').change(function() {
+
+      //if (jQuery(this).hasClass('e-commerce').is(':checked')) {
+
+          jQuery('#specs').load( "/ecommerce.html" );
+   
+     // }
 
     });
 

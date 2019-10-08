@@ -45,7 +45,7 @@ function sitecreator_get_envato_themes($collection) {
   $url = "https://api.envato.com/v3/market/user/collection?id=" . $collection->id;
   $curl = curl_init($url);
   
-  $personal_token = "ry8dHahFRPPKpRh804AXWvmvo5z7xCXa";
+  $personal_token = "";
   $header = array();
   $header[] = 'Authorization: Bearer '.$personal_token;
   $header[] = 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:41.0) Gecko/20100101 Firefox/41.0';
