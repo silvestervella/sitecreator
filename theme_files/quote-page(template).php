@@ -27,7 +27,7 @@ $message_sent    = "Thanks! Your Order has been submitted. We'll get back to you
  
 //user posted variables
 $selected_template = (string)$_POST['templates'];
-$selected_specs = (string)$_POST['specs'];
+$selected_specs = (string)$_POST['specifications'];
 $selected_images = (string)$_POST['images'];
 $selected_customisation = (string)$_POST['customisation'];
 $selected_domain = (string)$_POST['domain'];
@@ -62,6 +62,12 @@ function sitecreator_get_prods($atts) {
                 $price = get_post_meta($feature->ID, 'price');
                 $field .= '<label class="option">
                                 <input type="radio" class="calc templates '.$atts['terms'].'" name="templates" value="' . $feature->post_name .'" number="'.$price[0].'">
+                                <div class="img-wrap"> <img src="'. get_the_post_thumbnail_url( $feature->ID  ) .'"> </div>
+                            </label>';
+            } else if (has_term('specifications' , 'type' , $feature->ID)) {
+                $price = get_post_meta($feature->ID, 'price');
+                $field .= '<label class="option">
+                                <input type="radio" class="calc specifications '.$atts['terms'].'" name="specifications" value="' . $feature->post_name .'" number="'.$price[0].'">
                                 <div class="img-wrap"> <img src="'. get_the_post_thumbnail_url( $feature->ID  ) .'"> </div>
                             </label>';
             } else {
@@ -166,6 +172,7 @@ get_header(); ?>
                                     <div class="tablinks" name="blog">Blog</div>
                                     <div class="tablinks" name="ecommerce">Ecommerce</div>
                                     <div class="tablinks" name="portfolio">Portfolio</div>
+                                    <div class="tablinks" name="corporate">Corporate</div>
                                     </div>
 
                                     <!-- Tab content -->
@@ -180,9 +187,30 @@ get_header(); ?>
                                     <div id="portfolio" class="tabcontent">
                                     <?php echo sitecreator_get_prods(array('terms' => 'portfolio')); ?>
                                     </div>
+
+                                    <div id="corporate" class="tabcontent">
+                                    <?php echo sitecreator_get_prods(array('terms' => 'corporate')); ?>
+                                    </div>
                                 <div class="next">NEXT</div>
                             </fieldset>
-                            <fieldset class="quote-sec" id="specs"></fieldset>
+
+                            <fieldset class="quote-sec specs">
+                                <?php echo sitecreator_get_prods(array('terms' => 'blogs')); ?>
+                                <div class="next">NEXT</div>
+                            </fieldset>
+                            <fieldset class="quote-sec specs">
+                            <?php echo sitecreator_get_prods(array('terms' => 'e-commerces')); ?>
+                                <div class="next">NEXT</div>
+                            </fieldset>
+                            <fieldset class="quote-sec specs">
+                                <?php echo sitecreator_get_prods(array('terms' => 'portfolios')); ?>
+                                <div class="next">NEXT</div>
+                            </fieldset>
+                            <fieldset class="quote-sec specs">
+                                <?php echo sitecreator_get_prods(array('terms' => 'corporates')); ?>
+                                <div class="next">NEXT</div>
+                            </fieldset>
+
                             <fieldset class="quote-sec">
                                 <?php echo sitecreator_get_prods(array('terms' => 'images')); ?>
                                 <div class="next">NEXT</div>

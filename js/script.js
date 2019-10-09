@@ -85,16 +85,26 @@ jQuery(document).ready(function() {
         'display': 'block'
       });
 
+      var ecommerce = '<div class="options">';
 
-    // 1.5 check if ecommerce to add html
-    jQuery('.templates').change(function() {
+      ecommerce += '<label class="option">';
+      ecommerce += '<input type="radio" class="calc" name="specs" value="name of the package" number="30"></input>';
+      ecommerce += '<div class="img-wrap"> <img src="https://web.mygreyblack.com/wp-content/uploads/2019/09/261-e488b5.jpg"> </div>';
+      ecommerce += '</label>';
 
-      //if (jQuery(this).hasClass('e-commerce').is(':checked')) {
+      ecommerce += '<label class="option">';
+      ecommerce += '<input type="radio" class="calc" name="specs" value="name of the package" number="30"></input>';
+      ecommerce += '<div class="img-wrap"> <img src="https://web.mygreyblack.com/wp-content/uploads/2019/09/261-e488b5.jpg"> </div>';
+      ecommerce += '</label>';
 
-          jQuery('#specs').load( "/ecommerce.html" );
-   
-     // }
+      ecommerce += '<label class="option">';
+      ecommerce += '<input type="radio" class="calc" name="specs" value="name of the package" number="30"></input>';
+      ecommerce += '<div class="img-wrap"> <img src="https://web.mygreyblack.com/wp-content/uploads/2019/09/261-e488b5.jpg"> </div>';
+      ecommerce += '</label>';
 
-    });
+      ecommerce += '</div>';
+      
+      ecommerce += '<div class="next">NEXT</div>';
+
 
 });
