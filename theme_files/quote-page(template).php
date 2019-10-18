@@ -78,7 +78,7 @@ function sitecreator_get_prods($atts) {
                                 <input type="radio" class="calc templates '.$atts['terms'].'" name="templates" value="' . $feature->post_name .'" number="'.$price[0].'">
                                 <div class="img-wrap"> <img src="'. get_the_post_thumbnail_url( $feature->ID  ) .'"> </div>
                             </label>
-                            <div class="theme-options"><select class="options"> '.$options.'</select><div class="view-option"><a href="" target="_blank">View</a></div></div>';
+                            <div class="theme-options"><select class="options"> '.$options.'</select><div class="view-option"><a  target="_blank" class="view-button" href="">View</a></div></div>';
 
             } else if (has_term('specifications' , 'type' , $feature->ID)) {
                 $price = get_post_meta($feature->ID, 'price');
