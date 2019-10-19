@@ -55,32 +55,34 @@ function sitecreator_get_prods($atts) {
             )
         )
     ));
+
     if ($features):
-        $field = '<div class="options">';
+       $field = '<div class="options">';
         foreach($features as $feature) {
             if (has_term('templates' , 'type' , $feature->ID)) {
+                $previews = get_posts(array(
+                    'post_type' => 'previews',
+                    'posts_per_page'=>-1, 
+                    'numberposts'=>-1,
+                    'tax_query' => array(
+                        array(
+                            'taxonomy' => 'template',
+                            'field' => 'slug',
+                            'terms' => 'ID - '.$feature->ID,
+                        )
+                    )
+                ));
+
                 $price = get_post_meta($feature->ID, 'price');
-                $options = '';
-
-
-
-                $post_meta = get_post_meta($feature->ID);
-                foreach ($post_meta as $meta => $value) {
-                           if (strpos($meta, 'theme-option') !== false) {
-
-                            $options .= '<option value="'.$meta.'" url="'.$value[0].'">'. $meta .'</option>';
-                       }
+                $previewPage = '';
+                if ($previews) {
+                    $previewPage = '<div class="theme-options"><div class="view-option"><a target="_blank" class="view-button" href="'.get_post_permalink($previews[0]->ID).'">View</a></div></div>';
                 }
 
-
-
-
-                
                 $field .= '<label class="option">
                                 <input type="radio" class="calc templates '.$atts['terms'].'" name="templates" value="' . $feature->post_name .'" number="'.$price[0].'">
                                 <div class="img-wrap"> <img src="'. get_the_post_thumbnail_url( $feature->ID  ) .'"> </div>
-                            </label>
-                            <div class="theme-options"><select class="options"> '.$options.'</select><div class="view-option"><a  target="_blank" class="view-button" href="">View</a></div></div>';
+                            </label>'.$previewPage;
 
             } else if (has_term('specifications' , 'type' , $feature->ID)) {
                 $price = get_post_meta($feature->ID, 'price');
