@@ -76,6 +76,10 @@ function sitecreator_get_prods($atts) {
                 $price = get_post_meta($feature->ID, 'price');
                 $previewPage = '';
                 if ($previews) {
+
+
+                    // ADD SELECT OPTIONS HERE
+
                     $previewPage = '<div class="theme-options"><div class="view-option"><a target="_blank" class="view-button" href="'.get_post_permalink($previews[0]->ID).'">View</a></div></div>';
                 }
 
