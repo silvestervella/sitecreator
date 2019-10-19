@@ -12,6 +12,9 @@
  *
  * 1.1 Function calls
  * 1.2 Quote price calculator
+ * 1.3 Quote fieldset animation
+ * 1.4 Quote fieldset tabs
+ * 1.5 Add link to view button for templates
  *
  *
  * 2. window.load

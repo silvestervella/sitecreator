@@ -60,20 +60,22 @@ function sitecreator_get_prods($atts) {
         foreach($features as $feature) {
             if (has_term('templates' , 'type' , $feature->ID)) {
                 $price = get_post_meta($feature->ID, 'price');
-                $post_meta = get_post_meta($feature->ID);
-                $option_count = 0;
                 $options = '';
-                foreach ($post_meta as $meta => $value) {
 
-                        //foreach($value as $meta_name => $liballa  ) {
+
+
+                $post_meta = get_post_meta($feature->ID);
+                foreach ($post_meta as $meta => $value) {
                            if (strpos($meta, 'theme-option') !== false) {
 
                             $options .= '<option value="'.$meta.'" url="'.$value[0].'">'. $meta .'</option>';
                        }
-                        
-                  //  }
-
                 }
+
+
+
+
+                
                 $field .= '<label class="option">
                                 <input type="radio" class="calc templates '.$atts['terms'].'" name="templates" value="' . $feature->post_name .'" number="'.$price[0].'">
                                 <div class="img-wrap"> <img src="'. get_the_post_thumbnail_url( $feature->ID  ) .'"> </div>

@@ -3,6 +3,8 @@
  * 
  * 1. Register and enqueue script and styles
  * 2. Register templates CPT
+ * 3. Add page attributes to posts
+ * 4. Check/add term (Site feature ID) to Preview cpt Template taxonomy
  */
 
 
@@ -79,6 +81,24 @@ array(
 )
 );
 
+register_post_type( 'previews',
+array(
+  'labels' => array(
+    'name' => __( 'Previews' ),
+    'singular_name' => __( 'Preview' )
+  ),
+  'public' => true,  // it's not public, it shouldn't have it's own permalink, and so on
+  'publicly_queryable' => true,  // you should be able to query it
+  'show_ui' => true,  // you should be able to edit it in wp-admin
+  'exclude_from_search' => true,  // you should exclude it from search results
+  'show_in_nav_products' => false,  // you shouldn't be able to add it to products
+  'has_archive' => false,  // it shouldn't have archive page
+  'rewrite' => false,  // it shouldn't have rewrite rules
+  //'taxonomies'  => array( 'item_type' , 'gender' ),
+  'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields','excerpt' )
+)
+);
+
 $taxonomies = array(
   array(
       'slug'         => 'type',
@@ -87,6 +107,14 @@ $taxonomies = array(
       'post_type'    => 'site-features',
       'rewrite'      => array( 'slug' => 'type' ),
       'hierarchical' => true,
+  ),
+  array(
+    'slug'         => 'template',
+    'single_name'  => 'Template',
+    'plural_name'  => 'Templates',
+    'post_type'    => 'previews',
+    'rewrite'      => array( 'slug' => 'previews' ),
+    'hierarchical' => true,
   )
 );
 foreach( $taxonomies as $taxonomy ) {
@@ -123,5 +151,51 @@ foreach( $taxonomies as $taxonomy ) {
  * 3. Add page attributes to posts
 */
 add_post_type_support( 'post', 'page-attributes' );
+
+
+/**
+ * 4. Check/add term (Site feature ID) to Preview cpt Template taxonomy
+*/
+$args = array(
+  'post_type' => 'site-features',
+  'posts_per_page'=>-1, 
+  'numberposts'=>-1,
+  'tax_query' => array(
+      array(
+          'taxonomy' => 'type',
+          'field' => 'slug',
+          'terms' => 'templates',
+      )
+  )
+); 
+$theme_posts = get_posts($args);
+
+if ($theme_posts) {
+  foreach($theme_posts as $theme_post) { 
+    if (!term_exists('ID - '.$theme_post->ID ,  'template')) {
+      wp_insert_term( 'ID - '.$theme_post->ID, 'template');
+    }
+  }
+}
+
+
+
+
+
+add_filter('manage_edit-site-features_columns', 'posts_columns_id', 5);
+add_action('manage_posts_custom_column', 'posts_custom_id_columns', 5, 2);
+
+function posts_columns_id($defaults){
+$defaults['wps_post_id'] = __('ID');
+return $defaults;
+}
+function posts_custom_id_columns($column_name, $id){
+if($column_name === 'wps_post_id'){
+        echo $id;
+}
+}
+  
+
+
 
 ?>
