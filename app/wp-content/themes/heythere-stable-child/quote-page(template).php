@@ -80,13 +80,13 @@ function sitecreator_get_prods($atts) {
 
                     // ADD SELECT OPTIONS HERE
 
-                    $previewPage = '<div class="theme-options"><div class="view-option"><a target="_blank" class="view-button" href="'.get_post_permalink($previews[0]->ID).'">View</a></div></div>';
+                    $previewPage = '<div class="theme-options"><div class="view-option"><span class="view-button" url="'.get_post_permalink($previews[0]->ID).'">View</span></div></div>';
                 }
 
                 $field .= '<label class="option">
                                 <input type="radio" class="calc templates '.$atts['terms'].'" name="templates" value="' . $feature->post_name .'" number="'.$price[0].'">
                                 <div class="img-wrap"> <img src="'. get_the_post_thumbnail_url( $feature->ID  ) .'"> </div>
-                            </label>'.$previewPage;
+                            '.$previewPage.'</label>';
 
             } else if (has_term('specifications' , 'type' , $feature->ID)) {
                 $price = get_post_meta($feature->ID, 'price');
@@ -102,7 +102,7 @@ function sitecreator_get_prods($atts) {
                         </label>';
             }
         }
-        $field .= '</div>';
+        $field .= '</div><!-- /.options -->';
     endif; 
 return $field;
 }
@@ -305,6 +305,8 @@ get_header(); ?>
                 </div>
 
             </article>
+            <iframe id="preview-frame" src=""></iframe>
+            <div id="iframe-close"><span>Close</span></div>
 
             <div class="comments full-width">
 

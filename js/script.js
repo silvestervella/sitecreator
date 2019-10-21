@@ -90,10 +90,22 @@ jQuery(document).ready(function() {
 
 
       // 1.5 Add link to view button for templates
-      jQuery('.options').change(function() {
-        var viewLink = jQuery(this).find(":selected").attr('url');
-        console.log(viewLink);
-        jQuery(this).siblings('.view-option').find('.view-button').attr('href' , viewLink).attr('target', '_blank');
+      // jQuery('.options').change(function() {
+      //   var viewLink = jQuery(this).find(":selected").attr('url');
+      //   console.log(viewLink);
+      //   jQuery(this).siblings('.view-option').find('.view-button').attr('href' , viewLink).attr('target', '_blank');
+      // });
+
+      jQuery('.view-button').on('click' , function() {
+        var pageLink = jQuery(this).attr('url');
+        jQuery('#preview-frame').attr('src' , pageLink).fadeIn();
+        jQuery('#iframe-close').fadeIn();
+      });
+      jQuery('#iframe-close span').on('click' , function() {
+        jQuery('#preview-frame').fadeOut(function(){
+          jQuery(this).attr('src' , '');
+        })
+        jQuery(this).parent().fadeOut();
       })
 
 

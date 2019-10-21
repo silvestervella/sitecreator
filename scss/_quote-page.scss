@@ -150,5 +150,31 @@ body.post-template-quote-pagetemplate {
                 }
             }
         }
+        #preview-frame {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            left: 0;
+            height: 100vh;
+            padding: 5%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+        }
+        #iframe-close {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            left: 0;
+            padding: 15px;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            z-index:99999;
+            text-align: right;
+            span {
+                color: white;
+                font-size: 30px;
+                cursor: pointer;
+            }
+        }
     }
 }
