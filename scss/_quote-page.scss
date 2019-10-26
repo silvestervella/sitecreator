@@ -65,23 +65,31 @@ body.post-template-quote-pagetemplate {
                             margin-bottom: 15px;
                         }
                     }
-                    .next {
+                    .prev-next {
                         border-bottom: 1px solid white;
                         color: white;
                         font-size: 20px;
                         padding: 10px 20px;
                         margin-top: 30px;
-                        margin-right: 0;
-                        margin-left: auto;
-                        display: block;
-                        width: 100px;
+                        display: inline-block;
+                        width: 140px;
                         text-align: center;
+                        &.next {
+                            float: right;
+                        }
+                        &.prev {
+                            float: left;
+                        }
                     }
                     .options {
                         .option {
                             position: relative;
                             display: inline-block;
                             width: auto;
+                            padding-right: 25px;
+                            &:last-child {
+                                padding-right: 0;
+                            }
                             input {
                                 border: 0;
                                 position: absolute;
@@ -103,6 +111,15 @@ body.post-template-quote-pagetemplate {
                                     padding: 10px;
                                     border-radius: 20px;
                                     cursor: pointer;
+                                }
+                            }
+                            .theme-options {
+                                .view-option {
+                                    text-align: center;
+                                    padding-top: 10px;
+                                    span {
+                                        font-size: 16px;
+                                    }
                                 }
                             }
                         }

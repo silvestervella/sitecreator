@@ -76,10 +76,6 @@ function sitecreator_get_prods($atts) {
                 $price = get_post_meta($feature->ID, 'price');
                 $previewPage = '';
                 if ($previews) {
-
-
-                    // ADD SELECT OPTIONS HERE
-
                     $previewPage = '<div class="theme-options"><div class="view-option"><span class="view-button" url="'.get_post_permalink($previews[0]->ID).'">View</span></div></div>';
                 }
 
@@ -189,7 +185,7 @@ get_header(); ?>
                                 <label for="name"><span>Contact Name: <span class="required">*</span></span> <br><input type="text" name="message_name" value="<?php echo esc_attr($_POST['message_name']); ?>"></label>
                                 <label for="company"><span>Company: <span class="optional">(Optional)</span></span> <br><input type="text" name="message_company" value="<?php echo esc_attr($_POST['message_company']); ?>"></label>
                                 <label for="message_email"><span>Email: <span class="required">*</span></span> <br><input type="text" name="message_email" value="<?php echo esc_attr($_POST['message_email']); ?>"></label>
-                                <div class="next" >NEXT</div>
+                                <div class="prev-next next" >NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec">
                                     <div class="template-tabs">
@@ -215,50 +211,61 @@ get_header(); ?>
                                     <div id="corporate" class="tabcontent">
                                     <?php echo sitecreator_get_prods(array('terms' => 'corporate')); ?>
                                     </div>
-                                <div class="next">NEXT</div>
+                                <div class="prev-next prev">PREVIOUS</div>
+                                <div class="prev-next next">NEXT</div>
                             </fieldset>
 
                             <fieldset class="quote-sec specs">
                                 <?php echo sitecreator_get_prods(array('terms' => 'blogs')); ?>
-                                <div class="next">NEXT</div>
+                                <div class="prev-next prev">PREVIOUS</div>
+                                <div class="prev-next next">NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec specs">
                             <?php echo sitecreator_get_prods(array('terms' => 'e-commerces')); ?>
-                                <div class="next">NEXT</div>
+                                <div class="prev-next prev">PREVIOUS</div>
+                                <div class="prev-next next">NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec specs">
                                 <?php echo sitecreator_get_prods(array('terms' => 'portfolios')); ?>
-                                <div class="next">NEXT</div>
+                                <div class="prev-next prev">PREVIOUS</div>
+                                <div class="prev-next next">NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec specs">
                                 <?php echo sitecreator_get_prods(array('terms' => 'corporates')); ?>
-                                <div class="next">NEXT</div>
+                                <div class="prev-next prev">PREVIOUS</div>
+                                <div class="prev-next next">NEXT</div>
                             </fieldset>
 
                             <fieldset class="quote-sec">
                                 <?php echo sitecreator_get_prods(array('terms' => 'images')); ?>
-                                <div class="next">NEXT</div>
+                                <div class="prev-next prev">PREVIOUS</div>
+                                <div class="prev-next next">NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec">
                                 <?php echo sitecreator_get_prods(array('terms' => 'customisation')); ?>
-                                <div class="next">NEXT</div>
+                                <div class="prev-next prev">PREVIOUS</div>
+                                <div class="prev-next next">NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec">
                                 <?php echo sitecreator_get_prods(array('terms' => 'domain')); ?>
-                                <div class="next">NEXT</div>
+                                <div class="prev-next prev">PREVIOUS</div>
+                                <div class="prev-next next">NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec">
                                 <?php echo sitecreator_get_prods(array('terms' => 'hosting')); ?>
-                                <div class="next">NEXT</div>
+                                <div class="prev-next prev">PREVIOUS</div>
+                                <div class="prev-next next">NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec">
                                 <div id="quote-items"></div>
                                 <label for="message_text"><Span>Any queries or requests?  <span class="optional">(Optional)</span></span> <br><textarea type="text" name="message_text"><?php echo esc_textarea($_POST['message_text']); ?></textarea></label>
-                                <div class="next">NEXT</div>
+                                <div class="prev-next prev">PREVIOUS</div>
+                                <div class="prev-next next">NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec">
                                 <p><label for="message_human">Human Verification: <span class="required">*</span> <br><input type="text" name="message_human"> + 3 = 5</label></p>
                                 <input type="hidden" name="submitted" value="<?php echo wp_create_nonce('quote-nonce'); ?>">
+                                <div class="prev-next prev">PREVIOUS</div>
                                 <p><input type="submit"></p>
                             </fieldset>
                         </form>

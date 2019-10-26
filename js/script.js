@@ -58,6 +58,26 @@ jQuery(document).ready(function() {
         })
 
     });
+    jQuery('.quote-sec').on("click", '.prev' ,function() {
+
+      if (jQuery(this).parent().prev().hasClass('prev-field') ) {
+        jQuery(this)
+        .parent()
+        .prev()
+        .removeClass('prev-field')
+      }
+
+      jQuery(this)
+      .parent()
+      .addClass('prev-field ')
+      .prev()
+      .addClass('active')
+      .next()
+      .fadeOut(1000 ,function(){
+          jQuery(this).removeClass('active')
+      })
+
+  });
 
     // 1.4 Quote fieldset tabs
     jQuery('div.tablinks').on("click", function() {
