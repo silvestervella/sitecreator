@@ -53,9 +53,9 @@ jQuery(document).ready(function() {
         .next()
         .addClass('active')
         .prev()
-        .fadeOut(1000 ,function(){
-            jQuery(this).removeClass('active')
-        })
+        //.fadeOut(1000 ,function(){
+            .removeClass('active')
+       // })
 
     });
     jQuery('.quote-sec').on("click", '.prev' ,function() {
@@ -69,13 +69,12 @@ jQuery(document).ready(function() {
 
       jQuery(this)
       .parent()
-      .addClass('prev-field ')
       .prev()
       .addClass('active')
       .next()
-      .fadeOut(1000 ,function(){
-          jQuery(this).removeClass('active')
-      })
+      //.fadeOut(1000 ,function(){
+          .removeClass('active')
+      //})
 
   });
 

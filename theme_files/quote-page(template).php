@@ -188,6 +188,12 @@ get_header(); ?>
                                 <div class="prev-next next" >NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec">
+                                <div class="fieldset-title">
+                                    <h3>TEMPLATES</h3>
+                                    <div class="fieldset-desc">
+                                        Choose your category, then your template. Press the View button to preview it live.
+                                    </div>
+                                </div>
                                     <div class="template-tabs">
                                     <div class="tablinks" name="blog">Blog</div>
                                     <div class="tablinks" name="ecommerce">Ecommerce</div>
@@ -216,42 +222,90 @@ get_header(); ?>
                             </fieldset>
 
                             <fieldset class="quote-sec specs">
+                                <div class="fieldset-title">
+                                    <h3>Specifications</h3>
+                                    <div class="fieldset-desc">
+                                        Choose the specifications for your category.
+                                    </div>
+                                </div>
                                 <?php echo sitecreator_get_prods(array('terms' => 'blogs')); ?>
                                 <div class="prev-next prev">PREVIOUS</div>
                                 <div class="prev-next next">NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec specs">
+                                <div class="fieldset-title">
+                                    <h3>Specifications</h3>
+                                    <div class="fieldset-desc">
+                                        Choose the specifications for your category.
+                                    </div>
+                                </div>
                             <?php echo sitecreator_get_prods(array('terms' => 'e-commerces')); ?>
                                 <div class="prev-next prev">PREVIOUS</div>
                                 <div class="prev-next next">NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec specs">
+                                <div class="fieldset-title">
+                                    <h3>Specifications</h3>
+                                    <div class="fieldset-desc">
+                                        Choose the specifications for your category.
+                                    </div>
+                                </div>
                                 <?php echo sitecreator_get_prods(array('terms' => 'portfolios')); ?>
                                 <div class="prev-next prev">PREVIOUS</div>
                                 <div class="prev-next next">NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec specs">
+                                <div class="fieldset-title">
+                                    <h3>Specifications</h3>
+                                    <div class="fieldset-desc">
+                                        Choose the specifications for your category.
+                                    </div>
+                                </div>
                                 <?php echo sitecreator_get_prods(array('terms' => 'corporates')); ?>
                                 <div class="prev-next prev">PREVIOUS</div>
                                 <div class="prev-next next">NEXT</div>
                             </fieldset>
 
                             <fieldset class="quote-sec">
+                                <div class="fieldset-title">
+                                    <h3>Images</h3>
+                                    <div class="fieldset-desc">
+                                        Choose your images.
+                                    </div>
+                                </div>
                                 <?php echo sitecreator_get_prods(array('terms' => 'images')); ?>
                                 <div class="prev-next prev">PREVIOUS</div>
                                 <div class="prev-next next">NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec">
+                                <div class="fieldset-title">
+                                    <h3>Customisation</h3>
+                                    <div class="fieldset-desc">
+                                        Choose the specific customisation for your site.
+                                    </div>
+                                </div>
                                 <?php echo sitecreator_get_prods(array('terms' => 'customisation')); ?>
                                 <div class="prev-next prev">PREVIOUS</div>
                                 <div class="prev-next next">NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec">
+                                <div class="fieldset-title">
+                                    <h3>Domain</h3>
+                                    <div class="fieldset-desc">
+                                        Do you need a domain name? <span>(www.yourdomain.com)</span>
+                                    </div>
+                                </div>
                                 <?php echo sitecreator_get_prods(array('terms' => 'domain')); ?>
                                 <div class="prev-next prev">PREVIOUS</div>
                                 <div class="prev-next next">NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec">
+                                <div class="fieldset-title">
+                                    <h3>Hosting</h3>
+                                    <div class="fieldset-desc">
+                                        Do you need hosting for your site?
+                                    </div>
+                                </div>
                                 <?php echo sitecreator_get_prods(array('terms' => 'hosting')); ?>
                                 <div class="prev-next prev">PREVIOUS</div>
                                 <div class="prev-next next">NEXT</div>
@@ -263,10 +317,10 @@ get_header(); ?>
                                 <div class="prev-next next">NEXT</div>
                             </fieldset>
                             <fieldset class="quote-sec">
-                                <p><label for="message_human">Human Verification: <span class="required">*</span> <br><input type="text" name="message_human"> + 3 = 5</label></p>
+                                <p><label for="message_human">Human Verification: <span class="required">*</span> <br> + 3 = 5 <br><input type="text" name="message_human"></label></p>
                                 <input type="hidden" name="submitted" value="<?php echo wp_create_nonce('quote-nonce'); ?>">
                                 <div class="prev-next prev">PREVIOUS</div>
-                                <p><input type="submit"></p>
+                                <input class="submit prev-next" type="submit">
                             </fieldset>
                         </form>
                     </div>

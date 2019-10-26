@@ -1,6 +1,11 @@
 body.post-template-quote-pagetemplate {
     main {
-        background: $color-1;
+        background: #FEAC5E;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to left, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to left, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        .single-title {
+            color: white;
+        }
         #single-main-article-content {
             .error , .success {
                 font-size: 18px;
@@ -10,7 +15,7 @@ body.post-template-quote-pagetemplate {
             }
             .error {
                 color: $red;
-                background: $color-4;
+                background: white
             }
             .success {
                 color: lighten(black, 20%);
@@ -23,7 +28,7 @@ body.post-template-quote-pagetemplate {
                 fieldset {
                     width: 100%;
                     display: none;
-                    background: lighten($color-1, 3%);
+                    background: rgba(255,255,255,0.1);
                     padding: 30px 50px;
                     border-radius: 50px;
                     transform: translateX(0%) scale(1);
@@ -37,12 +42,12 @@ body.post-template-quote-pagetemplate {
                     &.prev-field {
                         animation: quote-anim-1 1s;
                         animation-fill-mode: forwards;
-                        display: block;
+                        display: none;
                         position: absolute;
                     }
                     label {
                         width: 100%;
-                        color: $color-4;
+                        color: white;
                         span {
                             font-size: 30px;
                             .required {
@@ -79,6 +84,12 @@ body.post-template-quote-pagetemplate {
                         }
                         &.prev {
                             float: left;
+                        }
+                        &.submit {
+                            float: right;
+                            background: none;
+                            border: 0;
+                            border-bottom: 1px solid white;
                         }
                     }
                     .options {
