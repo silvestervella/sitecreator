@@ -1,7 +1,19 @@
 #myfullpage {
     .section.banner-section {
         &:before {
-            background: red;
+            /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#2f2e96+1,4e40cb+100 */
+            background: rgb(47,46,150); /* Old browsers */
+            background: -moz-linear-gradient(45deg,  rgba(47,46,150,1) 1%, rgba(78,64,203,1) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(45deg,  rgba(47,46,150,1) 1%,rgba(78,64,203,1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(45deg,  rgba(47,46,150,1) 1%,rgba(78,64,203,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f2e96', endColorstr='#4e40cb',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        }
+    }
+    .banner-text-section {
+        > .featured-image {
+            &::before {
+                background: lighten($color-2, 30%);
+            }
         }
     }
 }

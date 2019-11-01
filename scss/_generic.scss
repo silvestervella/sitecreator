@@ -1,6 +1,14 @@
-body {
-    background: white;
-    a {
-        color: black
+// MENU
+
+#menu {
+    &:before {
+        background: rgba(lighten($color-2, 30%), 0.7);
     }
+}
+
+
+// FOOTER 
+
+.site-footer {
+    background: $color-1;
 }
