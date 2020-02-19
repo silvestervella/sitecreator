@@ -1,9 +1,11 @@
 <?php
-/*
- * Template Name: Quotation Template
- * Template Post Type: post, page
+/**
+ * The template for displaying all single posts
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
+ *
+ * @package RT_Portfolio
  */
- 
 //response generation function
 $response = "";
 
@@ -111,7 +113,7 @@ $headers = 'From: '. $email . "\r\n" .
   'Reply-To: ' . $email . "\r\n";
 
   if(!$human == 0){
-    if($human != 2 || !wp_verify_nonce($_POST['submitted'] , 'quote-nonce')) my_contact_form_generate_response("error", $not_human); //not human!
+    if($human != 2 || !wp_verify_nonce($_POST['submitted'] , 'testi-form-nonce')) my_contact_form_generate_response("error", $not_human); //not human!
     else {
         //validate email
         if(!filter_var($email, FILTER_VALIDATE_EMAIL))
@@ -140,7 +142,7 @@ $headers = 'From: '. $email . "\r\n" .
                         'post_content'  => $site_info . ' Email - ' .$email ,
                         'post_status'   => 'private',
                         'post_author'   => 1,
-                        'post_type'     => 'orders'
+                        'post_type'     => 'post'
                       );
                       wp_insert_post( $order_cpt );
                 } else {
@@ -151,16 +153,24 @@ $headers = 'From: '. $email . "\r\n" .
     }
   }
   else my_contact_form_generate_response("error", $missing_content);
-  
-get_header(); ?>
 
-    <main class="site-content text-center dark">
-
-        <?php if ( have_posts() ) : while ( have_posts() ) : the_post();
-            $heythere_lite_image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID),'heythere_lite_big');
-        ?>
-
-            <article <?php post_class(); ?>>
+get_header();
+?>
+<div class="section service-section">
+	<div class="container">
+		<div class="row">
+				<?php
+				while ( have_posts() ) :
+					the_post();
+				?>
+				<div class="custom-col-4">
+					<header class="entry-header heading">
+						<h2 class="entry-title"><?php the_title();?></h2>
+					</header>
+				</div>	
+				<div class="custom-col-8">
+                <main>
+				<article <?php post_class(); ?>>
 
                 <div class="relative width-100 height-50">
                     <div class="relative vertical-align padding-left-3pc padding-right-3pc break-word">
@@ -187,6 +197,8 @@ get_header(); ?>
                                 <label for="message_email"><span>Email: <span class="required">*</span></span> <br><input type="text" name="message_email" value="<?php echo esc_attr($_POST['message_email']); ?>"></label>
                                 <div class="prev-next next" >NEXT</div>
                             </fieldset>
+
+
                             <fieldset class="quote-sec">
                                 <div class="fieldset-title">
                                     <h3>TEMPLATES</h3>
@@ -195,10 +207,10 @@ get_header(); ?>
                                     </div>
                                 </div>
                                     <div class="template-tabs">
-                                    <div class="tablinks" name="blog">Blog</div>
-                                    <div class="tablinks" name="ecommerce">Ecommerce</div>
-                                    <div class="tablinks" name="portfolio">Portfolio</div>
-                                    <div class="tablinks" name="corporate">Corporate</div>
+                                        <div class="tablinks" name="blog">Blog</div>
+                                        <div class="tablinks" name="ecommerce">Ecommerce</div>
+                                        <div class="tablinks" name="portfolio">Portfolio</div>
+                                        <div class="tablinks" name="corporate">Corporate</div>
                                     </div>
 
                                     <!-- Tab content -->
@@ -232,6 +244,7 @@ get_header(); ?>
                                 <div class="prev-next prev">PREVIOUS</div>
                                 <div class="prev-next next">NEXT</div>
                             </fieldset>
+
                             <fieldset class="quote-sec specs">
                                 <div class="fieldset-title">
                                     <h3>Specifications</h3>
@@ -243,6 +256,7 @@ get_header(); ?>
                                 <div class="prev-next prev">PREVIOUS</div>
                                 <div class="prev-next next">NEXT</div>
                             </fieldset>
+
                             <fieldset class="quote-sec specs">
                                 <div class="fieldset-title">
                                     <h3>Specifications</h3>
@@ -254,6 +268,7 @@ get_header(); ?>
                                 <div class="prev-next prev">PREVIOUS</div>
                                 <div class="prev-next next">NEXT</div>
                             </fieldset>
+
                             <fieldset class="quote-sec specs">
                                 <div class="fieldset-title">
                                     <h3>Specifications</h3>
@@ -335,59 +350,30 @@ get_header(); ?>
                     <div class="single-main-tag text-center roboto"><?php the_tags('',' '); ?></div>
                 </div>
 
-                <div class="main-article-next-prev soft-dark width-100 padding-top-3 padding-bottom-3 roboto">
-                    <div class="color-hover padding-left-3pc text-right">
-                        <?php
-                        $prev_post = get_previous_post();
-                        if (!empty( $prev_post )): ?>
-                            <p class="font-size-0-7 font-weight-100 letter-spacing-0-1"><?php echo esc_html__( 'Prev Post:', 'heythere-lite' ); ?></p>
-                            <a  class="text-uppercase font-size-0-8 font-weight-400 letter-spacing-0-0-5" href="<?php echo $prev_post->guid ?>"><?php echo $prev_post->post_title ?></a>
-                        <?php endif ?>
-                    </div><!--
-                    --><div class="color-hover main-article-next-prev-home text-center">
-                        <?php
-                        function heythere_lite_get_blog_posts_page_url() {
-                        	if ( 'page' === get_option( 'show_on_front' ) ) {
-                        		return get_permalink( get_option( 'page_for_posts' ) );
-                        	}
-                        	return get_home_url();
-                        }
-                        ?>
-                        <a class="font-size-1-2" href="<?php echo heythere_lite_get_blog_posts_page_url(); ?>"><i class="fa fa-th-large fa-2x" aria-hidden="true"></i></a>
-                    </div><!--
-                    --><div class="color-hover padding-right-3pc text-left">
-                    <?php
-                     $next_post = get_next_post();
-                     if (!empty( $next_post )): ?>
-                         <p class="font-size-0-7 font-weight-100 letter-spacing-0-1"><?php echo esc_html__( 'Next Post:', 'heythere-lite' ); ?></p>
-                         <a class="text-uppercase font-size-0-8 font-weight-400 letter-spacing-0-0-5" href="<?php echo esc_url( get_permalink( $next_post->ID ) ); ?>"><?php echo esc_attr( $next_post->post_title ); ?></a>
-                     <?php endif; ?>
-                    </div>
-                </div>
-
             </article>
+            </main>
             <iframe id="preview-frame" src=""></iframe>
             <div id="iframe-close"><span>Close</span></div>
+					<div class="service-detail-wrapper">				
 
-            <div class="comments full-width">
+						<?php get_template_part( 'template-parts/content', 'single' ); 
 
-              <?php comments_template(); ?>
+						the_post_navigation();
 
-            </div>
+						// If comments are open or we have at least one comment, load up the comment template.
+						if ( comments_open() || get_comments_number() ) :
+							comments_template();
+						endif;	
+						?>
+					</div>
+				</div>
+				<?php 
 
-        <?php endwhile; ?>
-        <?php else: ?>
+				endwhile; // End of the loop.
+				?>
+		</div>
+	</div>
+</div>
 
-            <p><?php esc_html_e('Sorry, no post matched your criteria.', 'heythere-lite'); ?></p>
-
-        <?php endif; ?>
-
-        <div class="back-to-top-button fixed right-1 bottom-1 z-index-3 border-radius-100 cursor-pointer">
-            <div class="text-center border-radius-100 border-1">
-                <i class="fa fa-angle-up fa-lg relative vertical-align"></i>
-            </div>
-        </div>
-
-    </main>
-
-<?php get_footer(); ?>
+<?php
+get_footer();
