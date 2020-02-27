@@ -169,7 +169,6 @@ get_header();
 					</header>
 				</div>	
 				<div class="custom-col-8">
-                <main>
 				<article <?php post_class(); ?>>
 
                 <div class="relative width-100 height-50">
