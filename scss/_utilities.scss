@@ -1,22 +1,22 @@
 // Variables 
 
-$color-1: #3F36AF;
-$color-2: #692CAA;
-$color-3: #692CAA;
-$color-4: #692CAA;
+$color-1: #7d83b6;
+$color-2: #feef84;
+$color-3: #FFD4A3;
+$color-4: #FFD4A3;
 
 $red: #a03434;
 
 
 
 // background mixins
-@mixin bk-grad($color1, $color2) {
+@mixin bk-grad($color1, $color2 ,$color3) {
  
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5580e9+1,094ee5+100 */
 background: $color1; /* Old browsers */
-background: -moz-linear-gradient(45deg,  rgba($color1 , .8) 1%, rgba($color2 , 0.8) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(45deg,  rgba($color1 , .8) 1%, rgba($color2 , 0.8) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(45deg,  rgba($color1 , .8) 1%, rgba($color2 , 0.8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+background: -moz-linear-gradient(45deg,  rgba($color1 , 1) 1%, rgba($color2 , 1) 50%, rgba($color3 , 1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(45deg,  rgba($color1 , 1) 1%, rgba($color2 , 1) 50%, rgba($color3 , 1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(45deg,  rgba($color1 , 1) 1%, rgba($color2 , 1) 50%, rgba($color3 , 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$color1, endColorstr=$color2,GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
   }

@@ -117,15 +117,20 @@ jQuery(document).ready(function() {
 
       jQuery('.view-button').on('click' , function() {
         var pageLink = jQuery(this).attr('url');
-        jQuery('#preview-frame').attr('src' , pageLink).fadeIn();
-        jQuery('#iframe-close').fadeIn();
+
+        var win = window.open(pageLink, '_blank');
+        if (win) {
+            //Browser has allowed it to be opened
+            win.focus();
+        } else {
+            //Browser has blocked it
+            alert('Browser blocked the preview popup. Please copy the following URL to a new tab: ' + pageLink);
+        }
+
+        window.open(pageLink,'_blank');
       });
-      jQuery('#iframe-close span').on('click' , function() {
-        jQuery('#preview-frame').fadeOut(function(){
-          jQuery(this).attr('src' , '');
-        })
-        jQuery(this).parent().fadeOut();
-      })
+
+
 
 
 });

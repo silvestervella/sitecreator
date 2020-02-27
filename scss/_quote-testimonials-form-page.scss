@@ -1,8 +1,19 @@
 body.post-template-quote-pagetemplate , body.post-template-testimonials-pagetemplate {
+     #myfullpage {
+        @include bk-grad($color-2, $color-1 , $color-1);
+        >.section {
+            &::before {
+                display: none;
+            }
+            &:after {
+                display: none;
+            }
+        }
+        .custom-col-12 {
+            float: unset;
+        }
+     }
     main {
-        background: #FEAC5E;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to left, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to left, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
         .single-title {
             color: white;
         }
@@ -31,6 +42,7 @@ body.post-template-quote-pagetemplate , body.post-template-testimonials-pagetemp
                     background: rgba(255,255,255,0.1);
                     padding: 30px 50px;
                     border-radius: 50px;
+                    border: 0.5px solid white;
                     transform: translateX(0%) scale(1);
                     opacity: 1;
                     &.active {
@@ -62,7 +74,7 @@ body.post-template-quote-pagetemplate , body.post-template-testimonials-pagetemp
                             -webkit-appearance: none;
                             outline: 0;
                             border: 0;
-                            border-bottom: 1px solid lighten($color-1, 20%);
+                            border-bottom: 1px solid white;
                             width: 100%;
                             font-size: 40px;
                             color: white;
@@ -156,10 +168,10 @@ body.post-template-quote-pagetemplate , body.post-template-testimonials-pagetemp
                             transition: 0.3s;
                             border-bottom: 1px solid white;
                             &:hover {
-                                border-bottom: 1px solid $color-4;;
+                                border-bottom: 1px solid $color-3;;
                             }
                             &.active {
-                                border-bottom: 1px solid $color-4;
+                                border-bottom: 1px solid $color-3;
                             }
                         }
                     }
@@ -171,7 +183,7 @@ body.post-template-quote-pagetemplate , body.post-template-testimonials-pagetemp
                 }
                 #quote-items {
                     font-size: 30px;
-                    color: $color-4;
+                    color: $color-3;
                     span {
                         color: white;
                     }

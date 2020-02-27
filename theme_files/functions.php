@@ -23,12 +23,26 @@
     function sitecreator_styles_child()
     {
     // Register Child Styles
-    wp_register_style('sitecreator-child', get_stylesheet_directory_uri() . '/style.css', array(), '1.0', 'all');
+    //wp_register_style('sitecreator-child', get_stylesheet_directory_uri() . '/style.css', array(), '1.0', 'all');
     wp_register_style('child-all', get_stylesheet_directory_uri() . '/css/all.css', array(), '1.0', 'all');
 
     // Enqueue Child Styles
-    wp_enqueue_style('sitecreator-child'); 
+    wp_enqueue_style( 'rt-portfolio-fonts', rt_portfolio_fonts_url(), array(), null );	
+    //fontawesome css
+    wp_enqueue_style( 'fontawesome', get_template_directory_uri() . '/assets/css/font-awesome.min.css' );
+    //meanmenu css
+    wp_enqueue_style( 'jquery-meanmenu', get_template_directory_uri() . '/assets/css/meanmenu.css' );
+    //owl-carousel css
+    wp_enqueue_style( 'owl-carousel', get_template_directory_uri() . '/assets/css/owl.carousel.css' );
+    //owl theme default css
+    wp_enqueue_style( 'owl.theme.default', get_template_directory_uri() . '/assets/css/owl.theme.css' );	
+    wp_enqueue_style( 'rt-portfolio-style', get_stylesheet_uri() );
+    //Responsive css
+    wp_enqueue_style( 'rt-portfolio-responsive', get_template_directory_uri() . '/assets/css/responsive.css' );
+    // Child all.css
     wp_enqueue_style('child-all');
+
+
 
     //Register Child Scripts
     //wp_register_script( 'bootstrap', get_stylesheet_directory_uri() . '/js/bootstrap.min.js', array( 'jquery' ) );
@@ -37,10 +51,11 @@
     // Enqueue Child Scripts
     //wp_enqueue_script( 'bootstrap' ); 
     wp_enqueue_script( 'theme-script' );   
-
-
 }
 add_action('wp_enqueue_scripts', 'sitecreator_styles_child', 20); // Add Theme Child Stylesheet
+
+
+
 
 
 /**
