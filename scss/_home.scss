@@ -1,63 +1,67 @@
-#myfullpage {
-    @include bk-grad($color-2 ,  #bec1d8 , $color-1);
-    >.section {
-        &.banner-section {
-            &:before {
-                border-radius: 50%;
-                background: $color-2;
-            }
-            .banner-text-section {
-                p {
-                    color: white;
-                    a {
-                        color: $color-4;
+.elementor-section {
+    background: $color-2;
+    &#arlo-about {
+        .fn_cs_about_text_slider.fn_classic {
+            .info_list {
+                ul {
+                    li {
+                        .info_item {
+                            background-color: transparent;
+                        }
                     }
-                }
-                h3 {
-                    color: white;
-                }
-                .author-designation {
-                    &::before {
-                        background: $color-4;
-                    }
-                    span {
-                        background: unset;
-                        color: white;
-                    }
-                }
-            }
-            .banner-image-section {
-                .featured-image {
-                    max-width: 560px;
                 }
             }
         }
-        .service-item-wrapper {
-            margin-top: 250px;
-            h3 {
-                a {
-                    color: $color-4;
-                    &:hover {
-                        color: $color-3;
+        .fn_cs_about_text_slider {
+            .info_list {
+                ul {
+                    li {
+                        .info_item {
+                            span {
+                                a {
+                                    color: $color-1;
+                                }
+                            }
+                        }
                     }
                 }
             }
-            p {
-                color: white;
-                font-size: 20px;
-            }
-        }
-        .heading {
-            .entry-title {
-                color: $color-1;
+            .btn_list {
+                ul {
+                    li {
+                        a {
+                            background-color: $color-1;
+                        }
+                    }
+                }
             }
         }
     }
-    .banner-text-section {
-        > .featured-image {
-            &::before {
-                background: $color-4
+    &#arlo-services {
+        .snumbered_inner {
+            ul {
+                li {
+                    .item {
+                        &:after {
+                            background-color: $color-2;
+                        }
+                    }
+                    .number_holder {
+                        &:after {
+                            background-color: $color-2;
+                        }
+                    }
+                }
             }
         }
-    }
+        .bottom_part {
+            ul {
+                li {
+                    div {
+                        background: transparent;
+                    }
+                }
+            }
+        }
+    } 
 }
