@@ -46,36 +46,35 @@ jQuery(document).ready(function() {
 
     // 1.3 Quote fieldset animation
     jQuery('.quote-sec').on("click", '.next' ,function() {
+      event.preventDefault();
 
         jQuery(this)
         .parent()
         .addClass('prev-field ')
-        .next()
+        .nextAll('.quote-sec').first()
         .addClass('active')
-        .prev()
-        //.fadeOut(1000 ,function(){
-            .removeClass('active')
-       // })
+        .prevAll('.quote-sec').first()
+        .removeClass('active')
 
     });
     jQuery('.quote-sec').on("click", '.prev' ,function() {
+      event.preventDefault();
 
-      if (jQuery(this).parent().prev().hasClass('prev-field') ) {
-        jQuery(this)
-        .parent()
-        .prev()
-        .removeClass('prev-field')
-      }
+
+    
 
       jQuery(this)
       .parent()
-      .prev()
+      .prevAll('.quote-sec').first()
       .addClass('active')
-      .next()
-      //.fadeOut(1000 ,function(){
-          .removeClass('active')
-      //})
+      .nextAll('.quote-sec').first()
+      .removeClass('active')
 
+        
+      jQuery(this)
+      .parent()
+      .prevAll('.quote-sec').first()
+      .removeClass('prev-field')
   });
 
     // 1.4 Quote fieldset tabs
@@ -129,7 +128,43 @@ jQuery(document).ready(function() {
 
         window.open(pageLink,'_blank');
       });
+      
 
+      // 1.6 Choose specs div depending on category
+
+      //Function to get classes
+      ;!(function ($) {
+        $.fn.classes = function (callback) {
+            var classes = [];
+            $.each(this, function (i, v) {
+                var splitClassName = v.className.split(/\s+/);
+                for (var j = 0; j < splitClassName.length; j++) {
+                    var className = splitClassName[j];
+                    if (-1 === classes.indexOf(className)) {
+                        classes.push(className);
+                    }
+                }
+            });
+            if ('function' === typeof callback) {
+                for (var i in classes) {
+                    callback(classes[i]);
+                }
+            }
+            return classes;
+        };
+    })(jQuery);
+
+
+      jQuery('input:radio[name="templates"]').change(
+        function(){
+            if (this.checked) {
+              //get classes of checked radio
+              var raio_classes = jQuery(this).classes();
+              var last_class = raio_classes[raio_classes.length - 1];
+
+              jQuery('fieldset.specs').filter('.' + last_class).addClass('quote-sec').siblings('.specs').removeClass('quote-sec');            
+            }
+        });
 
 
 

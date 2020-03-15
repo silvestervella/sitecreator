@@ -1,45 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  font-family: $main-font;
+  font-weight: 300;
+  font-size: 17px;
+}
+
+a, a:active, a:focus{
+  outline: none; 
+}
+
+
+
 //MENU
 
 .arlo_fn_header {
-    background-color: $color-1;
-    .menu_nav {
-        ul.vert_nav {
-            li {
-                > a {
-                    color: white;
-                }
-            }
-        }
+  background-color: $primary;
+  .menu_nav {
+      ul.vert_nav {
+          li {
+              > a {
+                  color: white;
+                  &:hover {
+                      color: $grey !important;
+                  }
+              }
+          }
+      }
+  }
+  .menu_logo {
+      img {
+          max-width: 120px;
+      }
+  }
+  .arlo_fn_tagline {
+      .social_list {
+          ul {
+              li {
+                  a {
+                      color: white;
+                  }
+              }
+          }
+      }
+      .tline_search {
+          a {
+              color: white;
+          }
+      }
+  }
+  input[type=text] {
+      color: white;
+      &:focus {
+          background: none;
+          color: white;
+      }
+      &::placeholder {
+          color: white;
+      }
+  }
+  .header_closer {
+    background-color: $second;
+    &::after {
+      border-color: transparent $primary transparent transparent;
     }
-    .menu_logo {
-        img {
-            max-width: 120px;
-        }
-    }
-    .arlo_fn_tagline {
-        .social_list {
-            ul {
-                li {
-                    a {
-                        color: white;
-                    }
-                }
-            }
-        }
-        .tline_search {
-            a {
-                color: white;
-            }
-        }
-    }
-    input[type=text] {
-        color: white;
-        &:focus {
-            background: none;
-            color: white;
-        }
-        &::placeholder {
-            color: white;
-        }
-    }
+  }
 }

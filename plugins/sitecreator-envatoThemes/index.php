@@ -117,26 +117,71 @@ function  sitecreator_get_envato_collections() {
 
   $collections = $envatoRes->collections;
 
+  if(!term_exists('templates' , 'type')) {
+    wp_insert_term(
+      'Templates' , 
+      'type'
+      );
+  }
+  if(!term_exists('specifications' , 'type')) {
+    wp_insert_term(
+      'Specifications' , 
+      'type'
+    );
+  }
+  if(!term_exists('domain' , 'type')) {
+    wp_insert_term(
+      'Domain' , 
+      'type'
+    );
+  }
+  if(!term_exists('images' , 'type')) {
+    wp_insert_term(
+      'Images' , 
+      'type'
+    );
+  }
+  if(!term_exists('customisation' , 'type')) {
+    wp_insert_term(
+      'Customisation' , 
+      'type'
+    );
+  }
+  if(!term_exists('hosting' , 'type')) {
+    wp_insert_term(
+      'Hosting' , 
+      'type'
+    );
+  }
+
+    $theTemp = get_term_by( 'slug', 'templates', 'type' );
+    $theTempId = $theTemp->term_id;
+
+    $theSpec = get_term_by( 'slug', 'specifications', 'type' );
+    $theSpecId = $theSpec->term_id;
+
   foreach($collections as $collection) {
 
     $collection_name = $collection->name;
 
     if(!term_exists($collection_name , 'type')) {
+
       wp_insert_term(
         $collection_name , 
         'type',
         array(
-          'parent'      => '18',
+          'parent'      => $theTempId,
         )
         );
+
         wp_insert_term(
-          $collection_name . 's' , 
+          $collection_name . 's', 
           'type',
           array(
-            'parent'      => '29',
+            'parent'      => $theSpecId,
           )
-        );
-    };
+          );
+      };
 
     sitecreator_get_envato_themes($collection);
   }

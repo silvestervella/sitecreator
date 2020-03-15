@@ -1,4 +1,18 @@
 // Variables 
+@import url('https://fonts.googleapis.com/css?family=Barlow:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap');
+
+@font-face {
+  font-family: "My Custom Font";
+  src: url("../includes/fonts/Tryst-Regular.otf") format("opentype");
+}
+
+$primary: #2470a1;
+$second: #e5f0f7;
+$helper: #3c3953;
+$grey: #bdbdbd;
+$red: #d04545;
+$green: #a5ce53; 
+
 
 $color-1: #2470a1;
 $color-2: #e5f0f7;
@@ -7,6 +21,9 @@ $color-4: #fad3ce;
 $color-5: #AC2900;
 
 $red: #a03434;
+
+$heading-font: 'Barlow', sans-serif;
+$main-font: 'Cormorant Garamond', serif;
 
 
 
